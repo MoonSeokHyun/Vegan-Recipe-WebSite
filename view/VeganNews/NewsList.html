@@ -9,6 +9,33 @@
     <link rel="stylesheet" href="main.css">
     
 </head>
+
+<style>
+    .mainTitle{
+        text-align: center;
+    }
+
+    .newsWrite{
+        width: 1200px;
+        margin: 0 auto;
+    }
+
+    h1{
+        margin-top: 40px;
+        margin-bottom: 30px;
+        margin-left: 30%;
+    }
+    .paging{
+        margin-left: auto;
+        margin-right: auto;
+        display: table;
+    }
+    
+    .whyBtn{
+        margin-left: 80%;
+        margin-top: 30px;
+    }
+</style>
 <body>
     
     <!-- 헤더 -->
@@ -39,7 +66,7 @@
                     </ul>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Vegan News</a>
+                    <a class="nav-link disabled">Vegan News</a>
                   </li>
                 </ul>
                 <form class="d-flex">
@@ -51,85 +78,112 @@
           </nav>
     </header>
 
-    <!-- 메인 이미지 -->
-
-    <div class="container main_con">
+    <!-- 뉴스 리스트 -->
+    <div class="container">
+        <h1>NEWS AND PRESS RELEASES</h1>
         <div class="row">
-          <div class="col main">
-            <h3>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Provident atque nobis dolores ab consequatur, sit quaerat alias praesentium explicabo porro, ratione assumenda dolorum natus architecto sequi sunt libero optio esse.</h3>
-            <button type="button" class="btn btn-primary whyBtn">Click</button>
-          </div>
-          <div class="col">
-            <img src="img/딸기 메인.jpg" alt="" width="100%">
-          </div>
-        </div>
-
-    <!-- 비건 뉴스 -->
-    <div class="container veganNews">
-        <div class="row">
-            <h1>VEGAN NEWS</h1>
           <div class="col">
             <div class="card" style="width: 18rem;">
-                <img src="img/딸기 메인.jpg" class="card-img-top" alt="...">
+                <img src="../img/딸기 메인.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
               </div>
           </div>
           <div class="col">
             <div class="card" style="width: 18rem;">
-                <img src="img/딸기 메인.jpg" class="card-img-top" alt="...">
+                <img src="../img/딸기 메인.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
               </div>
           </div>
           <div class="col">
             <div class="card" style="width: 18rem;">
-                <img src="img/딸기 메인.jpg" class="card-img-top" alt="...">
+                <img src="../img/딸기 메인.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
               </div>
           </div>
           <div class="col">
             <div class="card" style="width: 18rem;">
-                <img src="img/딸기 메인.jpg" class="card-img-top" alt="...">
+                <img src="../img/딸기 메인.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+          </div>
+          <div class="col">
+            <div class="card" style="width: 18rem;">
+                <img src="../img/딸기 메인.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+              </div>
+          </div>
+          <div class="col">
+            <div class="card" style="width: 18rem;">
+                <img src="../img/딸기 메인.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+              </div>
+          </div>
+          <div class="col">
+            <div class="card" style="width: 18rem;">
+                <img src="../img/딸기 메인.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+              </div>
+          </div>
+                    <div class="col">
+            <div class="card" style="width: 18rem;">
+                <img src="../img/딸기 메인.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
               </div>
           </div>
         </div>
       </div>
 
-      <!-- 비건이란? -->
+      <!-- 글작성 -->
 
-      <div class="container veganWhy">
-        <div class="row">
-            <h1>WHY VEGAN</h1>
-          <div class="col">
-            <img src="img/딸기 메인.jpg" alt="" width="100%">
-          </div>
-          <div class="col">
-            <div class="whyContent">
-                <div class="whyContent2">
-                    <h4>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maxime ad vel ut et magni! Odio, illum aliquid porro maiores dolorem cum voluptate, molestiae doloremque culpa nesciunt veritatis expedita ipsa. Velit!
-                    </h4>
-    
-                    <button type="button" class="btn btn-primary whyBtn">Primary</button>
-                </div>
-            </div>
-          </div>
-        </div>
+      <div class="newsWrite">
+        <button type="button" class="btn btn-primary whyBtn">뉴스 작성</button>
+      </div>
+
+      <!-- 페이징 -->
+
+      <div class="paging">
+        <nav aria-label="..." class="paging">
+            <ul class="pagination">
+              <li class="page-item disabled">
+                <a class="page-link">Previous</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item active" aria-current="page">
+                <a class="page-link" href="#">2</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+              </li>
+            </ul>
+          </nav>
+      </div>
+
+
 
         <!-- 푸터 -->
         <div class="container">

@@ -9,6 +9,16 @@
     <link rel="stylesheet" href="main.css">
     
 </head>
+
+<style>
+    .mainTitle{
+        text-align: center;
+    }
+
+    .whyBtn{
+        margin-left: 46%;
+    }
+</style>
 <body>
     
     <!-- 헤더 -->
@@ -39,7 +49,7 @@
                     </ul>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Vegan News</a>
+                    <a class="nav-link disabled">Vegan News</a>
                   </li>
                 </ul>
                 <form class="d-flex">
@@ -51,85 +61,33 @@
           </nav>
     </header>
 
-    <!-- 메인 이미지 -->
+    <!-- 비건 뉴스 글쓰기 -->
 
-    <div class="container main_con">
-        <div class="row">
-          <div class="col main">
-            <h3>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Provident atque nobis dolores ab consequatur, sit quaerat alias praesentium explicabo porro, ratione assumenda dolorum natus architecto sequi sunt libero optio esse.</h3>
-            <button type="button" class="btn btn-primary whyBtn">Click</button>
+    <div class="mainTitle">
+        <h1>Vegan News</h1>
+    </div>
+    <form action="#">
+        <div class="mb-3" style="width: 50%; margin: 0 auto;">
+            <label for="exampleFormControlInput1" class="form-label">News Title</label>
+            <input type="email" class="form-control" id="exampleFormControlInput1">
           </div>
-          <div class="col">
-            <img src="img/딸기 메인.jpg" alt="" width="100%">
+          <div class="mb-3" style="width: 50%; margin: 0 auto;">
+            <label for="exampleFormControlInput1" class="form-label">News Witer</label>
+            <input type="email" class="form-control" id="exampleFormControlInput1">
           </div>
-        </div>
+          <div class="mb-3" style="width: 50%; margin: 0 auto;">
+            <label for="exampleFormControlTextarea1" class="form-label">News Content</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          </div>
+          <div class="mb-3" style="width: 50%; margin: 0 auto;">
+            <label for="formFileMultiple" class="form-label"></label>
+            <input class="form-control" type="file" id="formFileMultiple" multiple>
+          </div>
 
-    <!-- 비건 뉴스 -->
-    <div class="container veganNews">
-        <div class="row">
-            <h1>VEGAN NEWS</h1>
-          <div class="col">
-            <div class="card" style="width: 18rem;">
-                <img src="img/딸기 메인.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-          </div>
-          <div class="col">
-            <div class="card" style="width: 18rem;">
-                <img src="img/딸기 메인.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-          </div>
-          <div class="col">
-            <div class="card" style="width: 18rem;">
-                <img src="img/딸기 메인.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-          </div>
-          <div class="col">
-            <div class="card" style="width: 18rem;">
-                <img src="img/딸기 메인.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-          </div>
-        </div>
-      </div>
+          <button type="button" class="btn btn-primary whyBtn">글 수정</button>
+          <button type="button" class="btn btn-primary CancleBtn">취 &nbsp; 소</button>
+    </form>
 
-      <!-- 비건이란? -->
-
-      <div class="container veganWhy">
-        <div class="row">
-            <h1>WHY VEGAN</h1>
-          <div class="col">
-            <img src="img/딸기 메인.jpg" alt="" width="100%">
-          </div>
-          <div class="col">
-            <div class="whyContent">
-                <div class="whyContent2">
-                    <h4>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maxime ad vel ut et magni! Odio, illum aliquid porro maiores dolorem cum voluptate, molestiae doloremque culpa nesciunt veritatis expedita ipsa. Velit!
-                    </h4>
-    
-                    <button type="button" class="btn btn-primary whyBtn">Primary</button>
-                </div>
-            </div>
-          </div>
-        </div>
 
         <!-- 푸터 -->
         <div class="container">
