@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+
+   <!-- 히카리 커넥션 DB 설정 -->
+   <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+      <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+      <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/recipe_db?useSSL=false&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true" />
+      <property name="username" value="recipe" />
+      <property name="password" value="!Alcls1475" />
+   </bean>
+	
+	<!-- 위에 설정한 DB정보를 데이터소스 객체에 주입 -->
+   <bean id="ds" class="com.zaxxer.hikari.HikariDataSource">
+      <constructor-arg ref="hikariConfig" />
+   </bean>
+
+
+   <!-- 마이바티스 연결 객체 생성. -->
+   <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+      <property name="dataSource" ref="ds" />
+      <property name="mapperLocations" value="classpath:/mapper/*.xml" />
+   </bean>
+	
+
+
+   
+      <mybatis-spring:scan base-package="com.vegan.recipe.news.mapper"/>
+
+
+    
+
+
+</beans>
