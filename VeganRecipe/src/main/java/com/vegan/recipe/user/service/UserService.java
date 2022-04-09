@@ -12,12 +12,16 @@ public class UserService implements IUserService {
 	
 	@Override
 	public void joinUser(UserVO vo) {
-
+		mapper.joinUser(vo);
 	}
 
 	@Override
 	public int idCheck(String user_id) {
 		return mapper.idCheck(user_id);
 	}
-
+	
+	@Override
+	public UserVO Login(String user_id, String user_pw) {
+		return mapper.Login(user_id, user_pw);
+	}
 }

@@ -34,17 +34,17 @@
     <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
         <h4 class="mb-3">회원가입</h4>
-        <form class="validation-form" action="#">
+        <form class="validation-form" action="<c:url value = '/user/insertUser'/>" method="post">
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="id">아이디</label>
-              <input type="text" class="form-control" id="user_id" placeholder="아이디를 입력해주세요" value="" required>
+              <input type="text" class="form-control" id="user_id" name="user_id" placeholder="아이디를 입력해주세요" required>
               <div class="invalid-feedback">
               </div>
             </div>
             <div class="col-md-6 mb-3">
               <label for="name">이름</label>
-              <input type="text" class="form-control" id="name" placeholder="이름을 입력해주세요" value="" required>
+              <input type="text" class="form-control" id="name" name="user_name" placeholder="이름을 입력해주세요" value="" required>
               <div class="invalid-feedback">
               </div>
             </div>
@@ -61,7 +61,7 @@
 
           <div class="mb-3">
             <label for="pw">비밀번호</label>
-            <input type="password" class="form-control" id="pw" required>
+            <input type="password" class="form-control" name="user_pw" id="pw" required>
             <div class="invalid-feedback">
             </div>
           </div>
@@ -69,20 +69,20 @@
           <div class="mb-3">
             <label for="pw-ck">비밀번호 확인</label>
             <input type="password" class="form-control" id="pwck" required>
-            <div class="invalid-feedback">
+            <div class="pwckdiv">
             </div>
           </div>
 
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="email">이메일</label>
-              <input type="text" class="form-control" id="user_email" placeholder="abc1234@naver.com" value="" required>
+              <input type="text" class="form-control" id="user_email" name="user_email" placeholder="abc1234@naver.com" value="" required>
               <div class="invalid-feedback">
               </div>
             </div>
             <div class="col-md-6 mb-3">
               <label for="emailck">인증번호</label>
-              <input type="text" class="form-control" id="emailck" placeholder="" value="" required>
+              <input type="text" class="form-control" id="emailck" placeholder=""  value="" required>
               <div class="mail-check-warn">
                
               </div>
@@ -91,7 +91,7 @@
 
           <div class="row">
             <div class="col-md-6 mb-3">
-                <button class="btn btn-primary" id="mail-check-btn" >인증 번호 보내기</button>
+                <button class="btn-primary" id="mail-check-btn" >인증 번호 보내기</button>
             </div>
             <div class="col-md-6 mb-3">
 
@@ -100,24 +100,25 @@
 
           <div class="mb-3">
             <label for="address">주소</label>
-            <input type="text" class="form-control" id="address" placeholder="서울특별시 강남구" required>
+            <input type="text" class="form-control" id="address" name="user_addr1"  readonly placeholder="서울특별시 강남구" required>
             <div class="invalid-feedback">
               주소를 입력해주세요.
             </div>
           </div>
 
           <div class="mb-3">
-            <label for="address2">상세주소<span class="text-muted">&nbsp;(필수 아님)</span></label>
-            <input type="text" class="form-control" id="address2" placeholder="상세주소를 입력해주세요.">
+            <label for="address2">상세주소<span class="text-muted">&nbsp;(필수)</span></label>
+            <input type="text" class="form-control" id="address2" name="user_addr2" readonly placeholder="상세주소를 입력해주세요.">
           </div>
-
+			
+			<input type="hidden" value="0" name="user_pass">
           <hr class="mb-4">
           <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" id="aggrement" required>
             <label class="custom-control-label" for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
           </div>
           <div class="mb-4"></div>
-          <button class="btn btn-primary btn-lg"  type="submit">가입 완료</button>
+          <button class="btn btn-primary btn-lg submit_btn"  type="submit">가입 완료</button>
         </form>
       </div>
     </div>
@@ -135,12 +136,12 @@
 				return;
 			}
 			
-			const userId = $('#user_id').val();
+			const user_id = $('#user_id').val();
 			
 			$.ajax({
 				type : 'post',
 				url : '<c:url value = "/user/idCheck"/>',
-				data : userId,
+				data : user_id,
 				contentType : 'application/json',
 				success : function(data) {
 					console.log("ㅇㅇ 아작스 성공임 ㅊㅋㅊㅋ")
@@ -182,13 +183,26 @@
 			if(inputCode === code){
 				resultMsg.html('인증번호가 일치합니다.')
 				$('#user_email').attr('readonly', true);
+				$('#address').attr('readonly', false);
+				$('#address2').attr('readonly', false);
+				
 			}else{
 				resultMsg.html('인증번호가 불일치 합니다. 다시 확인해주세요.');
 			}
 		})
-	</script>
+		
+		$('#pwck').blur(function() {
+			if($('#pw').val() == $('#pwck').val()){
+			$('.pwckdiv').html('비밀번호가 같습니다.')
+		}else{
+			$('.pwckdiv').html('비밀번호가 다릅니다.')
+		}
+		})
+			</script>
 
   <script>
+  
+  
     window.addEventListener('load', () => {
       const forms = document.getElementsByClassName('validation-form');
 
@@ -197,6 +211,7 @@
           if (form.checkValidity() === false) {
             event.preventDefault();
             event.stopPropagation();
+            alert('회원가입이 완료되었습니다.')
           }
 
           form.classList.add('was-validated');

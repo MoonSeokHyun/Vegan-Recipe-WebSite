@@ -15,21 +15,21 @@
         <div class="inner_login">
         <div class="login_tistory">
     
-            <form method="post" id="authForm" action="#">
+  
                 <input type="hidden" name="redirectUrl" value="https://blogpack.tistory.com/manage">
                 <fieldset>
                 <legend class="screen_out">로그인 정보 입력폼</legend>
                 <div class="box_login">
                     <div class="inp_text">
                     <label for="loginId" class="screen_out">아이디</label>
-                    <input type="email" id="loginId" name="loginId" placeholder="ID" >
+                    <input type="text" id="loginId" name="user_id" placeholder="ID" >
                     </div>
                     <div class="inp_text">
                     <label for="loginPw" class="screen_out">비밀번호</label>
-                    <input type="password" id="loginPw" name="password" placeholder="Password" >
+                    <input type="password" id="loginPw" name="user_pw" placeholder="Password" >
                     </div>
                 </div>
-                <button type="submit" class="btn_login"  disabled>로그인</button>
+               					 <button type="submit" class="btn_login">로그인</button>
                 <div class="login_append">
                     <div class="inp_chk"> <!-- 체크시 checked 추가 -->
 
@@ -46,11 +46,51 @@
                 </div>
                 
                 </fieldset>
-            </form>
-            
+
         </div>
     </div>
     
 
 </body>
+
+<script>
+	$(function() {
+		$('.btn_login').click(function() {
+			const user_id = $('#loginId').val();
+			const user_pw = $('#loginPw').val();
+			
+			if(user_id === ''){
+				alert('아이디를 입력하세요!!');
+				return;
+			}else if(user_pw === ''){
+				alert('비밀번호를 입력하세요!!');
+				return;
+			}
+			else{
+				 const userInfo = {"user_id":user_id, "user_pw":user_pw};
+				 
+				$.ajax({
+					type : 'post',
+					url : '<c:url value="/user/userLogin" />',
+					data : JSON.stringify(userInfo),
+					dataType:"text",
+					contentType : "application/json; charset=UTF-8",
+					success : function(data) {
+						if(data == 'loginFail'){
+							alert('아이디 혹은 비밀번호가 틀립니다..');
+						}else{
+							alert(user_id+'님 반갑습니다.');
+							location.href='/Vegan/';
+						}
+					},error : function(status, error) {
+						console.log('에러발생!!');
+						console.log(userInfo);
+						console.log(status, error);
+					}
+					
+				})// 로그인 아작스 끝
+			}// 이프문 끝
+		})
+	})
+</script>
 </html>

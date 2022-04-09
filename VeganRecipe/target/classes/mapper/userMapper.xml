@@ -10,6 +10,19 @@
 	     	select count(*) from Vegan_user where user_id = #{user_id}
 	     </select>
 	     
+	     <!--  회원가입 -->
+	     
+	     <insert id="joinUser">
+	     	insert into Vegan_user
+			values (#{user_id},#{user_name},#{user_pw},#{user_email},#{user_addr1},#{user_addr2},#{user_pass})
+	     </insert>
+	     
+	     <!-- 로그인 -->
+	     <select id="Login" resultType="com.vegan.recipe.user.common.UserVO">
+	     	selecT * FROM Vegan_user 
+	     	where user_id = #{user_id}
+	     	and user_pw = #{user_pw}
+	     </select>
 	     
   </mapper>
   

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,9 +45,20 @@
                     <a class="nav-link" href="<c:url value ='/news/newsList'/>">Vegan News</a>
                   </li>
                 </ul>
-            	<div>
-            		<button type="button" class="btn btn-primary loginBtn">Login</button>
-            	</div>
+				<c:choose>
+					<c:when test="${login!=null}">
+						<div>
+            				<button type="button" class="btn btn-primary loginBtn">Logout</button>
+            			</div>
+					</c:when>
+					<c:otherwise>
+						<div>
+            	   			<button type="button" class="btn btn-primary loginBtn">Login</button>
+            			</div>
+					</c:otherwise>
+				</c:choose>
+            	
+
               </div>
             </div>
           </nav>

@@ -9,6 +9,8 @@ public interface IUserService {
 	// 아이디 중복확인
 	int idCheck(String user_id);
 	
+	//로그인
+	UserVO Login(String user_id, String user_pw);
 }
 
 
@@ -16,8 +18,7 @@ public interface IUserService {
 	
 /*
 	
-//로그인
-UserVO login(String id, String pw);
+
 	
 //회원 정보 얻기
 UserVO getInfo(String id);
