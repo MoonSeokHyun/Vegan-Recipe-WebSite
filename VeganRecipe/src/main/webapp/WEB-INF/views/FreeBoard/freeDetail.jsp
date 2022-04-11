@@ -26,7 +26,8 @@
     }
 
     h1{
-        margin-top: 30px;
+        padding-top: 30px;
+        padding-bottom: 30px
     }
 </style>
 <body>
@@ -40,28 +41,27 @@
     </div>
   
         <div class="mb-3" style="width: 50%; margin: 0 auto;">
-            <label for="exampleFormControlInput1" class="form-label">News Title</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1">
+            <label for="exampleFormControlInput1" class="form-label">Title</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" value="${Detail.freeboard_title}">
           </div>
           <div class="mb-3" style="width: 50%; margin: 0 auto;">
-            <label for="exampleFormControlInput1" class="form-label">News Witer</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1">
+            <label for="exampleFormControlInput1" class="form-label">Witer</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" value="${Detail.freeboard_writer}">
           </div>
           <div class="mb-3" style="width: 50%; margin: 0 auto;">
-            <label for="exampleFormControlInput1" class="form-label">News date</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1">
+            <label for="exampleFormControlInput1" class="form-label">date</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" value="${Detail.freeboard_regDate}">
           </div>
           <div class="mb-3" style="width: 50%; margin: 0 auto;">
             <label for="exampleFormControlTextarea1" class="form-label"></label>
             <div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem nesciunt quis possimus accusantium sit, molestias cumque laboriosam facere, a omnis, laudantium facilis nobis consequatur minima mollitia aspernatur dolorem natus eligendi.</p>
-                <img src="../img/딸기 메인.jpg" alt="" width="400px">
+         		${Detail.freeboard_content}
             </div>
           </div>
 
           <button type="button" class="btn btn-primary whyBtn">수정</button>
-          <button type="button" class="btn btn-primary CancleBtn">목록</button>
-
+          <button type="button" class="btn btn-primary CancleBtn listBtn">목록</button>
+		  <button type="button" class="btn btn-primary CancleBtn">삭제</button>
           <!-- 댓글 -->
         
         
@@ -94,4 +94,12 @@
 <!-- 푸터 -->
 <%@include file="../include/footer.jsp"%>
 </body>
+
+<script>
+	$(function() {
+		$('.listBtn').click(function() {
+			location.href = '<c:url value="/FreeBoard/freeList"/>';
+		})
+	})
+</script>
 </html>

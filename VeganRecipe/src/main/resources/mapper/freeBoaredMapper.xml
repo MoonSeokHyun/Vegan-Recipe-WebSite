@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.vegan.recipe.freeBoard.mapper.IfreeBoardMapper">
+     
+     
+     <!-- 글 등록 조회수랑 라이크는 0으로 세팅! -->
+     <insert id="insertFreeboard">
+     	insert into Vegan_freeBoard(
+     	freeboard_no,
+     	freeboard_title,
+     	freeboard_writer,
+     	freeboard_content,
+     	freeboard_hit,
+     	freeboard_like
+     	) values ((select * from (select max(freeboard_no)+1 from vegan_freeboard) next ),
+     	#{freeboard_title},#{freeboard_writer},#{freeboard_content},0,0)
+     </insert>
+     
+     
+     <!-- 글목록 나중에 페이징 이랑 검색 할꺼임 -->
+     
+     <select id="getFreeBoard" resultType="com.vegan.recipe.freeBoard.freeboardVO">
+     	select * from Vegan_freeBoard order by freeboard_no desc
+     </select>
+     
+          <select id="freeDetail" resultType="com.vegan.recipe.freeBoard.freeboardVO">
+     	select * from Vegan_freeBoard where freeboard_no = #{freeboard_no}
+     </select>
+  </mapper>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

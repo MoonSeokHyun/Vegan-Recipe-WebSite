@@ -25,7 +25,8 @@
     }
 
     h1{
-        margin-top: 30px;
+        padding-top: 30px;
+        padding-bottom: 30px
     }
 
     .paging{
@@ -55,7 +56,25 @@
     a:active {
         text-decoration: none;
     }
+	
+	/*---검색버튼--- */
+.search-wrap {
+	overflow: hidden; /*부모요소에 히든 */
+	margin-bottom: 20px;
+}
 
+.search-btn, .search-input, .search-select {
+	float: right; /*우측 플로팅 */
+}
+
+.search-input {
+	width: 140px;
+}
+
+#search-select {
+	width: 80px;
+}
+	
 
 </style>
 <body>
@@ -66,7 +85,21 @@
  <div class="mainTitle">
         <h1>Free Board</h1>
     </div>
-
+	
+                 <form action="<c:url value='/freeBoard/freeList' />">
+                        <div class="search-wrap clearfix">
+                            <button type="submit" class="btn btn-primary search-btn" style="margin-right: 24%;">검색</button>
+                            <input type="text" name="keyword" class="form-control search-input" value="${pc.paging.keyword}"
+                            style="width: 200px; ">
+                            <select class="form-control" id="search-select" name="condition" style="width: 80px; margin-left: 58%">
+                                <option value="title" ${pc.paging.condition == 'title' ? 'selected' : ''}>제목</option>
+                                <option value="content" ${pc.paging.condition == 'content' ? 'selected' : ''}>내용</option>
+                                <option value="writer" ${pc.paging.condition == 'writer' ? 'selected' : ''}>작성자</option>
+                                <option value="titleContent" ${pc.paging.condition == 'titleContent' ? 'selected' : ''}>제목+내용</option>
+                            </select>
+                        </div>
+                    </form> 
+	
     <!-- 비건 뉴스 상세보기 -->
     <table class="table" style="width: 70%; margin: 0 auto;">
         <thead>
@@ -80,31 +113,16 @@
           </tr>
         </thead>
         <tbody>
+        <c:forEach var="vo" items="${freeList}">
           <tr>
-            <th scope="row">1</th>
-            <td><a href="#">비건 음식 추천좀</a></td>
-            <td>비건짱</td>
-            <td>2022-04-03</td>
-            <td>123</td>
-            <td>123</td>
+          	<th scope="row">${vo.freeboard_no}</th>
+            <td><a href="<c:url value='/FreeBoard/freeDetail?freeboard_no=${vo.freeboard_no}'/>">${vo.freeboard_title}</a></td>
+            <td>${vo.freeboard_writer}</td>
+            <td>${vo.freeboard_regDate}</td>
+            <td>${vo.freeboard_hit}</td>
+            <td>${vo.freeboard_like}</td>
           </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td><a href="#">비건 음식 추천좀</a></td>
-            <td>비건짱</td>
-            <td>2022-04-03</td>
-            <td>123</td>
-            <td>123</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td><a href="#">비건 음식 추천좀</a></td>
-            <td>비건짱</td>
-            <td>2022-04-03</td>
-            <td>123</td>
-            <td>123</td>
-          </tr>
-
+         </c:forEach>
         </tbody>
       </table>
 
@@ -138,4 +156,12 @@
 <!-- 푸터 -->
 <%@include file="../include/footer.jsp"%>
 </body>
+
+<script>
+	$(function() {
+		$('.whyBtn').click(function() {
+			location.href = '<c:url value="/FreeBoard/freeWrite"/>';
+		})
+	})
+</script>
 </html>

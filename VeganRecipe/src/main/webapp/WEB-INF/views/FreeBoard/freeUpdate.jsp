@@ -16,7 +16,8 @@
         margin-left: 46%;
     }
     h1{
-        margin-top: 20px;
+        padding-top: 30px;
+        padding-bottom: 30px
     }
 </style>
 <body>

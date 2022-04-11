@@ -38,7 +38,7 @@
                       <li><a class="dropdown-item" href="#">비건레시피 자랑</a></li>
                       <li><a class="dropdown-item" href="#">비건레시피</a></li>
                       <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#">자유게시판</a></li>
+                      <li><a class="dropdown-item" href="<c:url value ='/FreeBoard/freeList'/>">자유게시판</a></li>
                     </ul>
                   </li>
                   <li class="nav-item">

@@ -13,7 +13,8 @@
         margin-left: 46%;
     }
     h1{
-        margin-top: 20px;
+        padding-top: 30px;
+        padding-bottom: 30px
     }
 </style>
 <meta charset="UTF-8">
@@ -28,18 +29,18 @@
     <div class="mainTitle">
         <h1>Free Board</h1>
     </div>
-    <form action="#">
+    <form action="<c:url value ='/FreeBoard/insertFreeboard'/>" method="post">
         <div class="mb-3" style="width: 50%; margin: 0 auto;">
             <label for="exampleFormControlInput1" class="form-label">News Title</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1">
+            <input type="text" class="form-control" name="freeboard_title" id="exampleFormControlInput1">
           </div>
           <div class="mb-3" style="width: 50%; margin: 0 auto;">
             <label for="exampleFormControlInput1" class="form-label">News Witer</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1">
+            <input type="text" class="form-control" name="freeboard_writer" value="${login.user_id}" id="exampleFormControlInput1">
           </div>
           <div class="mb-3" style="width: 50%; margin: 0 auto;">
             <label for="exampleFormControlTextarea1" class="form-label">News Content</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <textarea class="form-control " name="freeboard_content" id="exampleFormControlTextarea1" rows="6"></textarea>
           </div>
           <div class="mb-3" style="width: 50%; margin: 0 auto;">
             <label for="formFileMultiple" class="form-label"></label>
@@ -53,4 +54,13 @@
 <!-- 푸터 -->
 <%@include file="../include/footer.jsp"%>
 </body>
+
+<script>
+$(function() {
+	$('.whyBtn').click(function() {
+		$("form").submit();
+	})
+})
+
+</script>
 </html>
