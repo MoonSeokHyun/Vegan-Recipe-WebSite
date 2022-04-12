@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.vegan.recipe.freeBoard.freeboardVO;
 import com.vegan.recipe.freeBoard.mapper.IfreeBoardMapper;
+import com.vegan.recipe.util.PageVO;
 @Service
 public class freeBoardService implements IfreeBoardService {
 	
@@ -18,13 +19,16 @@ public class freeBoardService implements IfreeBoardService {
 		mapper.insertFreeboard(vo);
 	}
 	@Override
-	public List<freeboardVO> getFreeBoard() {
+	public List<freeboardVO> getFreeBoard(PageVO vo) {
 	
-		return mapper.getFreeBoard();
+		return mapper.getFreeBoard(vo);
 	}
 	@Override
 	public freeboardVO freeDetail(int freeboard_no) {
 		return mapper.freeDetail(freeboard_no);
 	}
-
+	@Override
+	public int getTotal(PageVO vo) {
+		return mapper.getTotal(vo);
+	}
 }

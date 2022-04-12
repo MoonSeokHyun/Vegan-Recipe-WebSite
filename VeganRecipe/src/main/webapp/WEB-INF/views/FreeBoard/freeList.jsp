@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -86,16 +87,15 @@
         <h1>Free Board</h1>
     </div>
 	
-                 <form action="<c:url value='/freeBoard/freeList' />">
+                 <form action="<c:url value='/FreeBoard/freeList'/>">
                         <div class="search-wrap clearfix">
                             <button type="submit" class="btn btn-primary search-btn" style="margin-right: 24%;">검색</button>
                             <input type="text" name="keyword" class="form-control search-input" value="${pc.paging.keyword}"
                             style="width: 200px; ">
-                            <select class="form-control" id="search-select" name="condition" style="width: 80px; margin-left: 58%">
-                                <option value="title" ${pc.paging.condition == 'title' ? 'selected' : ''}>제목</option>
-                                <option value="content" ${pc.paging.condition == 'content' ? 'selected' : ''}>내용</option>
-                                <option value="writer" ${pc.paging.condition == 'writer' ? 'selected' : ''}>작성자</option>
-                                <option value="titleContent" ${pc.paging.condition == 'titleContent' ? 'selected' : ''}>제목+내용</option>
+                            <select class="form-control" id="search-select" name="condition" style="width: 80px; margin-left: 54%">
+                                <option value="freeboard_title" ${pc.paging.condition == 'freeboard_title' ? 'selected' : ''}>제목</option>
+                                <option value="freeboard_content" ${pc.paging.condition == 'freeboard_content' ? 'selected' : ''}>내용</option>
+                                <option value="freeboard_writer" ${pc.paging.condition == 'freeboard_writer' ? 'selected' : ''}>작성자</option>
                             </select>
                         </div>
                     </form> 
@@ -134,26 +134,33 @@
         
               <!-- 페이징 -->
         
-              <div class="paging">
-                <nav aria-label="..." class="paging">
-                    <ul class="pagination">
-                      <li class="page-item disabled">
-                        <a class="page-link">Previous</a>
-                      </li>
-                      <li class="page-item"><a class="page-link" href="#">1</a></li>
-                      <li class="page-item active" aria-current="page">
-                        <a class="page-link" href="#">2</a>
-                      </li>
-                      <li class="page-item"><a class="page-link" href="#">3</a></li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                      </li>
-                    </ul>
-                  </nav>
-              </div>
-
-
-<!-- 푸터 -->
+			<div class="paging">
+					<form action="<c:url value='/FreeBoard/freeList' />" name="pageForm">
+	                        <div class="text-center clearfix">
+	                            <ul class="pagination" id="pagination">
+	                            	<c:if test="${pc.prev}">
+	                                	<li class="page-item "><a  class="page-link" href="#" data-pageNum="${pc.beginPage-1}">Prev</a></li>
+	                                </c:if>
+	                                
+	                                <c:forEach var="num" begin="${pc.beginPage}" end="${pc.endPage}">
+	                                	<li class="${pc.paging.pageNum == num ? 'age-item active' : ''}" page-item><a class="page-link" href="#" data-pageNum="${num}">${num}</a></li>
+	                                </c:forEach>
+	                                
+	                                <c:if test="${pc.next}">
+	                               		<li class="page-item"><a class="page-link" href="#" data-pageNum="${pc.endPage+1}">Next</a></li>
+	                                </c:if>
+	                            </ul>
+	                            
+	                            <!-- 페이지 관련 버튼을 클릭 시 같이 숨겨서 보낼 값 -->
+	                            <input type="hidden" name="pageNum" value="${pc.paging.pageNum}">
+	                            <input type="hidden" name="countPerPage" value="${pc.paging.countPerPage}">
+	                            <input type="hidden" name="keyword" value="${pc.paging.keyword}">
+	                            <input type="hidden" name="condition" value="${pc.paging.condition}">
+	                            <input type="hidden" name="pagecnt" value="10">
+	                        </div>
+                        </form>
+			</div>
+                        
 <%@include file="../include/footer.jsp"%>
 </body>
 
@@ -162,6 +169,15 @@
 		$('.whyBtn').click(function() {
 			location.href = '<c:url value="/FreeBoard/freeWrite"/>';
 		})
+		$('#pagination').on('click', 'a', function(e) {
+			e.preventDefault();
+			console.log($(this));
+			const value = $(this).data('pagenum');
+			console.log(value);
+			document.pageForm.pageNum.value = value;
+			document.pageForm.submit();
+		});
+		
 	})
 </script>
 </html>

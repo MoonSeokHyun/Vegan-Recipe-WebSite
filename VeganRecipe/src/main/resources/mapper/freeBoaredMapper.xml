@@ -6,6 +6,20 @@
   <mapper namespace="com.vegan.recipe.freeBoard.mapper.IfreeBoardMapper">
      
      
+
+	<sql id="search">
+		<if test="condition == 'freeboard_title'">
+			WHERE freeboard_title LIKE CONCAT('%',#{keyword},'%')
+		</if>
+		<if test="condition == 'freeboard_content'">
+			WHERE freeboard_content LIKE CONCAT('%',#{keyword},'%')
+		</if>
+		<if test="condition == 'freeboard_writer'">
+			WHERE freeboard_writer LIKE CONCAT('%',#{keyword},'%')
+		</if>
+	</sql>
+	
+     
      <!-- 글 등록 조회수랑 라이크는 0으로 세팅! -->
      <insert id="insertFreeboard">
      	insert into Vegan_freeBoard(
@@ -23,12 +37,25 @@
      <!-- 글목록 나중에 페이징 이랑 검색 할꺼임 -->
      
      <select id="getFreeBoard" resultType="com.vegan.recipe.freeBoard.freeboardVO">
-     	select * from Vegan_freeBoard order by freeboard_no desc
+
+     	select * from Vegan_freeBoard 
+     	<include refid="search" />
+     	order by freeboard_no desc
+     	limit #{pagecnt} ,  #{countPerPage}
+
+     	
      </select>
      
           <select id="freeDetail" resultType="com.vegan.recipe.freeBoard.freeboardVO">
-     	select * from Vegan_freeBoard where freeboard_no = #{freeboard_no}
+     	select * from Vegan_freeBoard where freeboard_no = #{freeboard_no} 
      </select>
+     
+     <!-- 토탈 -->
+     	<select id="getTotal" resultType="int">
+		SELECT COUNT(*)
+		FROM Vegan_freeBoard
+		<include refid="search" />
+	</select>
   </mapper>
   
   

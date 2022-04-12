@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
+<script type="text/javascript" src="../resources/ckeditor/ckeditor.js"></script>
 <head>
 <style>
     .mainTitle{
@@ -40,7 +41,7 @@
           </div>
           <div class="mb-3" style="width: 50%; margin: 0 auto;">
             <label for="exampleFormControlTextarea1" class="form-label">News Content</label>
-            <textarea class="form-control " name="freeboard_content" id="exampleFormControlTextarea1" rows="6"></textarea>
+            <textarea class="form-control " name="freeboard_content" id="ckeditor" rows="6"></textarea>
           </div>
           <div class="mb-3" style="width: 50%; margin: 0 auto;">
             <label for="formFileMultiple" class="form-label"></label>
@@ -59,8 +60,27 @@
 $(function() {
 	$('.whyBtn').click(function() {
 		$("form").submit();
-	})
-})
+	});
+	
+	 CKEDITOR.replace( 'ckeditor', {//해당 이름으로 된 textarea에 에디터를 적용
+         width:'100%',
+         height:'400px',
+         filebrowserImageUploadUrl: '<c:url value = "/FreeBoard/imageUpload"/>'
+     });
+	 
+	  CKEDITOR.on('dialogDefinition', function( ev ){
+          var dialogName = ev.data.name;
+          var dialogDefinition = ev.data.definition;
+        
+          switch (dialogName) {
+              case 'image': //Image Properties dialog
+                  //dialogDefinition.removeContents('info');
+                  dialogDefinition.removeContents('Link');
+                  dialogDefinition.removeContents('advanced');
+                  break;
+          }
+      });
+});
 
 </script>
 </html>
