@@ -7,24 +7,25 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.UUID;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.annotation.RequestScope;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.google.gson.JsonObject;
 import com.vegan.recipe.freeBoard.Service.IfreeBoardService;
 import com.vegan.recipe.util.PageCreate;
 import com.vegan.recipe.util.PageVO;
+
 
 @Controller
 @RequestMapping("/FreeBoard")
@@ -78,62 +79,63 @@ public class freeBoardController {
 	}
 	
 //	이미지 업로드
-	@PostMapping("/imageUpload")
-	public String uploadImg(HttpServletRequest request, HttpServletResponse resopnse, @RequestParam MultipartFile upload) {
-		System.out.println("파일 업로드 실행");
-		System.out.println(upload);
-	
-		UUID uid = UUID.randomUUID();
-
-		OutputStream out = null;
+	@ResponseBody
+	@RequestMapping(value = "fileupload.do")
+    public void communityImageUpload(HttpServletRequest req, HttpServletResponse resp, MultipartHttpServletRequest multiFile) throws Exception{
+		JsonObject jsonObject = new JsonObject();
 		PrintWriter printWriter = null;
+		OutputStream out = null;
+		MultipartFile file = multiFile.getFile("upload");
 		
-		//인코딩
-		resopnse.setCharacterEncoding("utf-8");
-		resopnse.setContentType("text/html;charset=utf-8");
-		
+		if(file != null) {
+			if(file.getSize() >0 && StringUtils.isNotBlank(file.getName())) {
+				if(file.getContentType().toLowerCase().startsWith("image/")) {
+				    try{
+				    	 
+			            String fileName = file.getOriginalFilename();
+			            byte[] bytes = file.getBytes();
+			           
+			            String uploadPath = req.getServletContext().getRealPath("/img"); //저장경로
+			            System.out.println("uploadPath:"+uploadPath);
 
-		try {
-			// 파일 이름 가져오기
-			String fileName = upload.getOriginalFilename();
-			byte[] bytes = upload.getBytes();
+			            File upoloadFIle = new File(uploadPath);
+			            String fileName2 = UUID.randomUUID().toString();
+			            uploadPath = uploadPath + "/" + fileName2 +fileName;
+			            
+			            out = new FileOutputStream(new File(uploadPath));
+			            out.write(bytes);
+			            
+			            printWriter = resp.getWriter();
+			            String fileUrl = req.getContextPath() + "/img/" +fileName2 +fileName; //url경로
+			            System.out.println("fileUrl :" + fileUrl);
+			            JsonObject json = new JsonObject();
+			            json.addProperty("uploaded", 1);
+			            json.addProperty("fileName", fileName);
+			            json.addProperty("url", fileUrl);
+			            printWriter.print(json);
+			            System.out.println(json);
+			 
+			        }catch(IOException e){
+			            e.printStackTrace();
+			        } finally {
+			            if (out != null) {
+		                    out.close();
+		                }
+		                if (printWriter != null) {
+		                    printWriter.close();
+		                }
+			        }
+				}
+
 			
-			//이미지 경로 생성
-			String path = "C:\\test\\upload";
-			String ckUploadPath = path + uid + "_" + fileName;
-			File folder = new File(path);
-			
-			//해당 디렉토리 확인
-			if(!folder.exists()) {
-				folder.mkdir(); //폴더 생성
-			}
-			
-			out = new FileOutputStream(new File(ckUploadPath));
-			out.write(bytes);
-			out.flush();
-			
-			String callback = request.getParameter("CKEditorFuncNum");
-			printWriter = resopnse.getWriter();
-			String fileUrl = ckUploadPath; // 작성화면
-			
-			//업로드시 메시지 출력
-			printWriter.println("{\"filename\" : \""+fileName+"\", \"uploaded\" : 1, \"url\":\""+fileUrl+"\"}");
-			printWriter.flush();
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}finally {
-			try {
-				if(out != null) { out.close(); } 
-				if(printWriter != null) { printWriter.close(); }
-			} catch (Exception e) {e.printStackTrace();}
 		}
-
-		
-		 return null;
 		
 	}
-	
+	}
+}
+
+
+
 
 	
-}
+
