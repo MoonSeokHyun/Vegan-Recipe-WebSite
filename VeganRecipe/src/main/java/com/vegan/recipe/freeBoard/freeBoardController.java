@@ -95,10 +95,13 @@ public class freeBoardController {
 			            String fileName = file.getOriginalFilename();
 			            byte[] bytes = file.getBytes();
 			           
-			            String uploadPath = req.getServletContext().getRealPath("/img"); //저장경로
+			            String uploadPath = req.getSession().getServletContext().getRealPath("/resources/images/noticeimg"); //저장경로
 			            System.out.println("uploadPath:"+uploadPath);
 
-			            File upoloadFIle = new File(uploadPath);
+			            File uploadFile = new File(uploadPath);
+			            if(!uploadFile.exists()) {
+			            	uploadFile.mkdir();
+			            }
 			            String fileName2 = UUID.randomUUID().toString();
 			            uploadPath = uploadPath + "/" + fileName2 +fileName;
 			            
@@ -106,7 +109,7 @@ public class freeBoardController {
 			            out.write(bytes);
 			            
 			            printWriter = resp.getWriter();
-			            String fileUrl = req.getContextPath() + "/img/" +fileName2 +fileName; //url경로
+			            String fileUrl = req.getContextPath() + "/resources/images/noticeimg/" +fileName2 +fileName; //url경로
 			            System.out.println("fileUrl :" + fileUrl);
 			            JsonObject json = new JsonObject();
 			            json.addProperty("uploaded", 1);

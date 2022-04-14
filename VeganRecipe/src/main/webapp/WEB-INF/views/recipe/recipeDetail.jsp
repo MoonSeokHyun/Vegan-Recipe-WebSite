@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <html>
 
 <style>
@@ -76,13 +77,13 @@
         
         <div class="mb-3" style="width: 50%; margin: 0 auto;">
             <label for="exampleFormControlInput1" class="form-label">Comment Writer</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1">
+            <input type="text" class="form-control commnet_id" id="exampleFormControlInput1" name="commnet_id">
           </div>
           <div class="mb-3" style="width: 50%; margin: 0 auto;">
             <label for="exampleFormControlTextarea1" class="form-label">Comment</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+            <textarea class="form-control commnet_content" id="exampleFormControlTextarea1" rows="2" name="commnet_content"></textarea>
           </div>
-       <button type="button" class="btn btn-primary whyBtn1">댓글 등록</button>
+       <button type="button" class="btn btn-primary whyBtn1" id="com_btn">댓글 등록</button>
 
         
         <!-- 댓글이 들어갈 부분 -->
@@ -102,4 +103,5 @@
 <!-- 푸터 -->
 <%@include file="../include/footer.jsp"%>
 </body>
+
 </html>
