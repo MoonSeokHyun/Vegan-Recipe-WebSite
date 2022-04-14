@@ -25,4 +25,4 @@ only myself 100%
 - 1. ck에디터 이미지 업로드 (완료)
 - 2. MYSQL로 페이징 및 검색 (완료)
 - 3. MYSQL 적용(완료)
-
+- 4. Restful 형식으로 최대한 표현 Get . post. put . delete
