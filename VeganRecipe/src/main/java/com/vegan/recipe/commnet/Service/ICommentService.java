@@ -10,10 +10,10 @@ public interface ICommentService {
 	void insertCom(CommentVO vo);
 	
 	// 댓글 리스트
-	List<CommentVO> getList();
+	List<CommentVO> getList(int bno , int comment_type);
 	
 	// 댓글 총 개수
-	void getTotal();
+	int getTotal(int bno , int comment_type);
 	
 	
 	

@@ -17,6 +17,14 @@
      	#{bno},#{commnet_id},#{commnet_content},#{comment_type})
      </insert>
      
+     
+     <select id="getTotal" resultType="int">
+    	select count(*) from vegan_comment where bno = #{bno} and comment_type = #{comment_type}
+     </select>
+     
+     <select id="getList" resultType="com.vegan.recipe.commnet.CommentVO"> 
+     	select * from vegan_comment where bno =#{bno} and comment_type = #{comment_type}
+     </select>
   </mapper>
   
   

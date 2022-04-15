@@ -1,6 +1,9 @@
 package com.vegan.recipe.commnet.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,15 +22,23 @@ public class CommentService implements ICommentService {
 	}
 
 	@Override
-	public List<CommentVO> getList() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<CommentVO> getList(int bno , int comment_type) {
+		List<CommentVO> list = new ArrayList<CommentVO>();
+		
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("bno", bno);
+		data.put("comment_type", comment_type);
+		
+		return mapper.getList(data);
 	}
 
 	@Override
-	public void getTotal() {
-		// TODO Auto-generated method stub
-
+	public int getTotal(int bno , int comment_type) {
+		
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("bno", bno);
+		data.put("comment_type", comment_type);
+		return mapper.getTotal(data);
 	}
 
 }

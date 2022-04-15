@@ -77,17 +77,8 @@
 
         
         <!-- 댓글이 들어갈 부분 -->
-        <div>
-            <div class="mb-3" style="width: 50%; margin: 0 auto;">
-                <label for="exampleFormControlInput1" class="form-label">Comment Writer :  asdasd</label>
-                &nbsp;&nbsp;&nbsp;<a href="#" >삭제</a></span>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" readonly>나는 비건</textarea>
-               
-            </div>
-            <div class="mb-3" style="width: 50%; margin: 0 auto;">
-                <label for="exampleFormControlInput1" class="form-label">Comment Writer :  asdasd</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" readonly>나는 비건</textarea>
-            </div>
+        <div class="com_box">
+
         </div>
 
 
@@ -140,7 +131,42 @@
 				});//아작스 끝
 			} //  else 문 끝
 		})// 댓글 등록 끝
+		getList(); 
+	
+	
+		let str = "";
 		
+		function getList() {
+			const bno = ${Detail.freeboard_no};
+			const comment_type = 0; 
+			const commnet_id = $('.commnet_id').val();
+			const commnet_content = $('.commnet_content').val();
+			
+			$.getJSON(
+				"<c:url value = '/com/getList/'/>" + bno + "/"+ comment_type,
+				function(data) {
+					console.log(data.total);
+					if(data.total > 0){
+						let list = data.getList;
+						console.log(list);
+						for(i = 0; i<list.length; i++){
+							let commnet_id = list[i].commnet_id;
+							let commnet_content = list[i].commnet_content;
+							
+							str = "ㅁㄴㅇ"
+						}
+						commnet_id
+						$('.com_box').html(str);
+						
+					}else{
+						str = "<div class='mb-3' style='width: 50%; margin: 0 auto;> 등록된 댓글이 없습니다" ;	
+						str = "</div>"
+						$('.com_box').html(str);
+					}
+				}
+			)
+			
+		}
 		
 	})// 스크립트 종료문
 
