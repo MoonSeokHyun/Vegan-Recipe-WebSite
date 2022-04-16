@@ -134,7 +134,7 @@
 		getList(); 
 	
 	
-		let str = "";
+		
 		
 		function getList() {
 			const bno = ${Detail.freeboard_no};
@@ -147,20 +147,30 @@
 				function(data) {
 					console.log(data.total);
 					if(data.total > 0){
-						let list = data.getList;
-						console.log(list);
+						var list = data.getList;
+						let str = "";
 						for(i = 0; i<list.length; i++){
 							let commnet_id = list[i].commnet_id;
 							let commnet_content = list[i].commnet_content;
 							
-							str = "ㅁㄴㅇ"
+							console.log(commnet_id);
+							console.log(commnet_content);
+							str += "<div>";
+							str += "<div class='' style='width: 50%; margin: 0 auto;'>"
+							str += "<label for 'exampleFormControlInput1' class='form-label'>Comment Writer :"+commnet_id+"</label>"
+							str += "&nbsp;&nbsp;&nbsp;<a href='#' >삭제</a>&nbsp;&nbsp;<a href='#' >답글</a></span>"
+							str += "<textarea class='form-control' id='exampleFormControlTextarea1' rows='3' readonly>"+commnet_content+"</textarea>"
+							str += " </div>"
 						}
-						commnet_id
+						
 						$('.com_box').html(str);
 						
 					}else{
-						str = "<div class='mb-3' style='width: 50%; margin: 0 auto;> 등록된 댓글이 없습니다" ;	
-						str = "</div>"
+						str = "<div>";
+						str = "<div class='' style='width: 50%; margin: 0 auto;'>"
+						str = "&nbsp;&nbsp;&nbsp;<a href='#' >삭제</a></span>"
+						str = "<textarea class='form-control' id='exampleFormControlTextarea1' rows='3' readonly>등록된 댓글이 없어요 ㅠㅠ</textarea>"
+						str = " </div>"
 						$('.com_box').html(str);
 					}
 				}
