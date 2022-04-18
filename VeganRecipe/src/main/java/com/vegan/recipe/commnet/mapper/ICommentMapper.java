@@ -15,4 +15,6 @@ public interface ICommentMapper {
 	
 	// 댓글 총 개수
 	int getTotal(Map<String, Object> data);
+	// 댓글 삭제 
+	void deleteCOm(int comment_no);
 }

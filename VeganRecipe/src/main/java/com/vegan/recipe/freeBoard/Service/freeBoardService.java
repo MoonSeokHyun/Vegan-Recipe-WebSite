@@ -31,4 +31,13 @@ public class freeBoardService implements IfreeBoardService {
 	public int getTotal(PageVO vo) {
 		return mapper.getTotal(vo);
 	}
+	@Override
+	public void hit(int freeboard_no) {
+		mapper.hit(freeboard_no);
+	}
+	@Override
+	public void comCNT(int freeboard_no) {
+		mapper.comCNT(freeboard_no);
+		
+	}
 }

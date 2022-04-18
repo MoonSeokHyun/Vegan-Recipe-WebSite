@@ -14,6 +14,8 @@ public interface ICommentService {
 	
 	// 댓글 총 개수
 	int getTotal(int bno , int comment_type);
+	// 댓글 삭제ㅐ
+	void deleteCOm(int comment_no);
 	
 	
 	

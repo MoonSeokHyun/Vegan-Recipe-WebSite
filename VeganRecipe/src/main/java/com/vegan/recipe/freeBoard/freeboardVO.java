@@ -38,4 +38,5 @@ public class freeboardVO {
 	private String filename;
 	private String ilerealname; // 파일리얼네임
 	private Timestamp freeboard_regDate;
+	private int com_cnt;
 }

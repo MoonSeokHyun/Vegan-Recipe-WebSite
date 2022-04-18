@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.google.gson.JsonObject;
+import com.vegan.recipe.commnet.Service.ICommentService;
 import com.vegan.recipe.freeBoard.Service.IfreeBoardService;
 import com.vegan.recipe.util.PageCreate;
 import com.vegan.recipe.util.PageVO;
@@ -33,6 +34,8 @@ public class freeBoardController {
 	
 	@Autowired
 	private IfreeBoardService service;
+	@Autowired
+	private ICommentService comservice;
 	
 //	자유게시판 이동 메소드
 	@GetMapping("/freeList")
@@ -72,7 +75,7 @@ public class freeBoardController {
 //	상세보기
 	@GetMapping("/freeDetail")
 	public void freeDetail(int freeboard_no, Model model) {
-		
+		service.hit(freeboard_no);
 		System.out.println("상세보기 페이지");
 		model.addAttribute("Detail", service.freeDetail(freeboard_no));
 		

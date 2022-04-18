@@ -40,5 +40,10 @@ public class CommentService implements ICommentService {
 		data.put("comment_type", comment_type);
 		return mapper.getTotal(data);
 	}
-
+	
+	@Override
+	public void deleteCOm(int comment_no) {
+		mapper.deleteCOm(comment_no);
+		
+	}
 }

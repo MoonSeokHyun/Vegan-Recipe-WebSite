@@ -12,19 +12,15 @@
     .mainTitle{
         text-align: center;
     }
-
     .whyBtn{
         margin-left: 46%;
     }
-
     .whyBtn1{
         margin-left: 69%;
     }
-
     .del-btn{
         margin-left: 95%
     }
-
     h1{
         padding-top: 30px;
         padding-bottom: 30px
@@ -125,7 +121,6 @@
 						}
 					},	error : function(status, error) {
 						console.log('에러발생!!');
-
 						console.log(status, error);
 					}
 				});//아작스 끝
@@ -152,13 +147,13 @@
 						for(i = 0; i<list.length; i++){
 							let commnet_id = list[i].commnet_id;
 							let commnet_content = list[i].commnet_content;
-							
+							let comment_no = list[i].comment_no;
 							console.log(commnet_id);
 							console.log(commnet_content);
 							str += "<div>";
 							str += "<div class='' style='width: 50%; margin: 0 auto;'>"
 							str += "<label for 'exampleFormControlInput1' class='form-label'>Comment Writer :"+commnet_id+"</label>"
-							str += "&nbsp;&nbsp;&nbsp;<a href='#' >삭제</a>&nbsp;&nbsp;<a href='#' >답글</a></span>"
+							str += "&nbsp;&nbsp;&nbsp;<span id='asdfg' style='cursor:pointer' data-id = '"+comment_no+"'>삭제</span>&nbsp;&nbsp;<span style='cursor:pointer'>답글</span></span>"
 							str += "<textarea class='form-control' id='exampleFormControlTextarea1' rows='3' readonly>"+commnet_content+"</textarea>"
 							str += " </div>"
 						}
@@ -178,7 +173,34 @@
 			
 		}
 		
+		
+		$(document).on('click','#asdfg', function() {
+			const comment_no = $(this).data('id');
+			console.log(comment_no)
+			
+			$.ajax({
+				url : '<c:url value = "/com/comDelete" />',
+				type : 'post',
+				data:JSON.stringify(
+		                  {
+		                	  /* "com_bno":com_bno, */
+		                     "comment_no":comment_no
+		                  }),
+		                  headers : {
+		  					'Content-type' : 'application/json'
+		  				},
+				success : function(data) {
+					alert('삭제완료')
+					getList();
+				}
+				
+			})// 삭제 아작스 끝
+			
+		})
+		
+		
+		
+		
 	})// 스크립트 종료문
-
 </script>
 </html>

@@ -56,6 +56,19 @@
 		FROM Vegan_freeBoard
 		<include refid="search" />
 	</select>
+	
+	<!-- 조회수 -->
+	
+	<update id="hit">
+	 update Vegan_freeBoard 
+      set freeboard_hit = freeboard_hit + 1
+      where freeboard_no = #{freeboard_no}
+	</update>
+	
+	<select id="comCNT" resultType="com.vegan.recipe.freeBoard.freeboardVO" >
+		select u.*, (select count(*) from vegan_comment where bno = #{freeboard_no} ) as com_cnt  
+		from vegan_freeboard u where freeboard_no = #{freeboard_no}; 
+	</select>
   </mapper>
   
   

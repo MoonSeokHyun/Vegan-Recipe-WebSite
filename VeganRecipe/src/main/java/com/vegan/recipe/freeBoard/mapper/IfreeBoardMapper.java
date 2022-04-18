@@ -14,4 +14,6 @@ public interface IfreeBoardMapper {
 //	글 상세보기 
 	freeboardVO freeDetail(int freeboard_no);
 	int getTotal(PageVO vo);
+	void hit(int freeboard_no);
+	void comCNT(int freeboard_no);
 }

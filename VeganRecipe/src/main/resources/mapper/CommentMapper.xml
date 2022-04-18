@@ -25,6 +25,11 @@
      <select id="getList" resultType="com.vegan.recipe.commnet.CommentVO"> 
      	select * from vegan_comment where bno =#{bno} and comment_type = #{comment_type}
      </select>
+     
+     <!-- 삭제 -->
+     <delete id="deleteCOm">
+     	delete from vegan_comment where comment_no = #{comment_no}
+     </delete>
   </mapper>
   
   
