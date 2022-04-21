@@ -1,8 +1,10 @@
 package com.vegan.recipe.freeBoard.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import com.vegan.recipe.freeBoard.freeboardVO;
+import com.vegan.recipe.util.LikeVO;
 import com.vegan.recipe.util.PageVO;
 
 public interface IfreeBoardMapper {
@@ -16,4 +18,8 @@ public interface IfreeBoardMapper {
 	int getTotal(PageVO vo);
 	void hit(int freeboard_no);
 	void comCNT(int freeboard_no);
+	int findLike(Map<String, Object> data);
+	void likeUp(Map<String, Object> data);
+	void likeDown(Map<String, Object> data);
+	int getLike(int board_no);
 }

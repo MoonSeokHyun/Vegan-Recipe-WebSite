@@ -38,7 +38,10 @@
      
      <select id="getFreeBoard" resultType="com.vegan.recipe.freeBoard.freeboardVO">
 
-     	select * from Vegan_freeBoard 
+     	select *,
+     	(select count(*) from vegan_comment where bno = v.freeboard_no) as com_cnt,
+		(select count(*) from vegan_like where board_no = v.freeboard_no) as like_cnt
+     	 from Vegan_freeBoard  v
      	<include refid="search" />
      	order by freeboard_no desc
      	limit #{pagecnt} ,  #{countPerPage}
@@ -69,14 +72,34 @@
 		select u.*, (select count(*) from vegan_comment where bno = #{freeboard_no} ) as com_cnt  
 		from vegan_freeboard u where freeboard_no = #{freeboard_no}; 
 	</select>
+	
+	<!-- 좋아요 눌럿는지 안눌럿는지 -->
+	<select id="findLike" resultType="int">
+		select count(*) from vegan_like where board_no = #{board_no} and user_no = #{user_no}
+	</select>
+	
+	
+	<!-- 좋아요 -->
+	
+	<insert id="likeUp">
+		insert into vegan_like (like_no ,board_no , user_no, freeboard_like)
+		values((select * from (select max(like_no)+1 from vegan_like) next), #{board_no},#{user_no},1)
+	</insert>
+	
+	  <!-- 좋아요 불러오기 -->  
+	  <select id="getLike" resultType="int">
+	  	select count(*) from vegan_like where board_no = #{board_no}
+	  </select>
+	  
+	  <delete id="likeDown">
+	  	delete from vegan_like where board_no = #{board_no} and user_no = #{user_no} 
+	  </delete>
   </mapper>
   
+
   
-  
-  
-  
-  
-  
+
+ 
   
   
   

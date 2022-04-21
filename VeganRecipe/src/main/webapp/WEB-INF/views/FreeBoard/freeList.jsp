@@ -116,11 +116,11 @@
         <c:forEach var="vo" items="${freeList}">
           <tr>
           	<th scope="row">${vo.freeboard_no}</th>
-            <td><a href="<c:url value='/FreeBoard/freeDetail?freeboard_no=${vo.freeboard_no}'/>">${vo.freeboard_title}</a></td>
+            <td><a href="<c:url value='/FreeBoard/freeDetail?freeboard_no=${vo.freeboard_no}&user_id=${login.user_id}'/>">${vo.freeboard_title} (${vo.com_cnt})</a></td>
             <td>${vo.freeboard_writer}</td>
             <td>${vo.freeboard_regDate}</td>
             <td>${vo.freeboard_hit}</td>
-            <td>${vo.freeboard_like}</td>
+            <td>${vo.like_cnt}</td>
           </tr>
          </c:forEach>
         </tbody>

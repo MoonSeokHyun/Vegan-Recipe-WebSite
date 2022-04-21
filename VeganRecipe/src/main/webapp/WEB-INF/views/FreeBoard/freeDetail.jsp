@@ -38,16 +38,29 @@
   
         <div class="mb-3" style="width: 50%; margin: 0 auto;">
             <label for="exampleFormControlInput1" class="form-label">Title</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" value="${Detail.freeboard_title}">
+            <input type="text" class="form-control" id="exampleFormControlInput1" value="${Detail.freeboard_title}" readonly>
           </div>
-          <div class="mb-3" style="width: 50%; margin: 0 auto;">
-            <label for="exampleFormControlInput1" class="form-label">Witer</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" value="${Detail.freeboard_writer}">
-          </div>
-          <div class="mb-3" style="width: 50%; margin: 0 auto;">
-            <label for="exampleFormControlInput1" class="form-label">date</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" value="${Detail.freeboard_regDate}">
-          </div>
+          <div class="row g-3" style="width: 51%; margin: 0 auto; margin-top: -25px" >
+		  <div class="col">
+		   <label for="exampleFormControlInput1" class="form-label">Witer</label>
+		    <input type="text" class="form-control" id="exampleFormControlInput1" value="${Detail.freeboard_writer}" readonly>
+		  </div>
+		  <div class="col">
+		   <label for="exampleFormControlInput1" class="form-label">date</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" value="${Detail.freeboard_regDate}" readonly>
+		  </div>
+		</div>
+		<div class="row g-3" style="width: 51%; margin: 0 auto; margin-top: -10px" >
+		 <div class="col">
+		   <label for="exampleFormControlInput1" class="form-label">HIT</label>
+		    <input type="text" class="form-control" id="exampleFormControlInput1" value="${Detail.freeboard_hit}" readonly>
+		  </div>
+		  <div class="col">
+		   <label for="exampleFormControlInput1" class="form-label">Like</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" value="${getLike}" readonly>
+		  </div>
+		</div>
+		
           <div class="mb-3" style="width: 50%; margin: 0 auto;">
             <label for="exampleFormControlTextarea1" class="form-label"></label>
             <div>
@@ -58,6 +71,7 @@
           <button type="button" class="btn btn-primary whyBtn">수정</button>
           <button type="button" class="btn btn-primary CancleBtn listBtn">목록</button>
 		  <button type="button" class="btn btn-primary CancleBtn">삭제</button>
+		  <button type="button" class="btn btn-primary CancleBtn LikeBtn">좋아요</button>
           <!-- 댓글 -->
 
         
@@ -84,6 +98,59 @@
 
 <script>
 	$(function() { // 스크립트 시작문
+		
+		
+		
+		// 좋아요 
+		var likeval = ${like};
+		
+		let board_no = ${Detail.freeboard_no};
+		let user_no = '${login.user_id}';
+		if(likeval > 0){
+			console.log(likeval + "좋아요 누름");
+			$('.LikeBtn').html("좋아요 취소");
+			$('.LikeBtn').click(function() {
+				$.ajax({
+					type :'post',
+					url : '<c:url value ="/FreeBoard/likeDown"/>',
+					contentType: 'application/json',
+					data : JSON.stringify(
+							{
+								"board_no" : board_no,
+								"user_no" : user_no
+							}		
+						),
+					success : function(data) {
+						alert('취소 성공');
+					}
+				})// 아작스 끝
+			})
+
+		}else{
+			console.log(likeval + "좋아요 안누름")
+			console.log(user_no);
+			$('.LikeBtn').click(function() {
+				$.ajax({
+					type :'post',
+					url : '<c:url value ="/FreeBoard/likeUp"/>',
+					contentType: 'application/json',
+					data : JSON.stringify(
+							{
+								"board_no" : board_no,
+								"user_no" : user_no
+							}		
+						),
+					success : function(data) {
+						alert('성공염');
+					}
+				})// 아작스 끝
+			})
+		
+			
+		}
+			
+		
+		
 		$('.listBtn').click(function() {
 			location.href = '<c:url value="/FreeBoard/freeList"/>';
 		})

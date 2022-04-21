@@ -15,8 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -24,6 +27,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.google.gson.JsonObject;
 import com.vegan.recipe.commnet.Service.ICommentService;
 import com.vegan.recipe.freeBoard.Service.IfreeBoardService;
+import com.vegan.recipe.user.service.IUserService;
+import com.vegan.recipe.util.LikeVO;
 import com.vegan.recipe.util.PageCreate;
 import com.vegan.recipe.util.PageVO;
 
@@ -36,6 +41,8 @@ public class freeBoardController {
 	private IfreeBoardService service;
 	@Autowired
 	private ICommentService comservice;
+	@Autowired
+	private IUserService userService;
 	
 //	자유게시판 이동 메소드
 	@GetMapping("/freeList")
@@ -74,11 +81,41 @@ public class freeBoardController {
 	
 //	상세보기
 	@GetMapping("/freeDetail")
-	public void freeDetail(int freeboard_no, Model model) {
-		service.hit(freeboard_no);
+	public void freeDetail(int freeboard_no, String user_id,Model model) {
+		
 		System.out.println("상세보기 페이지");
 		model.addAttribute("Detail", service.freeDetail(freeboard_no));
 		
+		LikeVO like = new LikeVO();
+		
+		like.setBoard_no(freeboard_no);
+		like.setUser_no(user_id);
+		
+		model.addAttribute("like", service.findLike(freeboard_no, user_id));
+		model.addAttribute("getLike", service.getLike(freeboard_no));
+		service.hit(freeboard_no);
+		
+		
+		
+	}
+	
+	// 좋아요
+	
+	@ResponseBody 
+	@PostMapping("/likeUp")
+	public void likeup(@RequestBody LikeVO vo) {
+		System.out.println("컨트롤러 연결 성공");
+		System.out.println(vo.getBoard_no());
+		System.out.println(vo.getUser_no());
+		service.likeUp(vo.getBoard_no(), vo.getUser_no());
+	
+	}
+	
+	@ResponseBody
+	@PostMapping("/likeDown")
+	public void likeDown(@RequestBody LikeVO vo) {
+		System.out.println("좋아요 싫어요!");
+		service.likeDown(vo.getBoard_no(), vo.getUser_no());
 	}
 	
 //	이미지 업로드
