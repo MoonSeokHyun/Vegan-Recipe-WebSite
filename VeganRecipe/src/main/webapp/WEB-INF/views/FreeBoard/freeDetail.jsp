@@ -68,9 +68,9 @@
             </div>
           </div>
 
-          <button type="button" class="btn btn-primary whyBtn">수정</button>
+          <button type="button" class="btn btn-primary whyBtn updateBtn">수정</button>
           <button type="button" class="btn btn-primary CancleBtn listBtn">목록</button>
-		  <button type="button" class="btn btn-primary CancleBtn">삭제</button>
+		  <button type="button" class="btn btn-primary CancleBtn delbtn">삭제</button>
 		  <button type="button" class="btn btn-primary CancleBtn LikeBtn">좋아요</button>
           <!-- 댓글 -->
 
@@ -97,8 +97,30 @@
 </body>
 
 <script>
+	
+	//RedirectAttributes 로 던져서 메시지 출력
+	const msg = '${msg}';
+	if(msg !== '') {
+		alert("게시물 수정 완료되었습니다.");
+	}
+	
+	
 	$(function() { // 스크립트 시작문
 		
+		
+		
+		// 글수정
+		$('.updateBtn').click(function() {
+			location.href = "<c:url value='/FreeBoard/freeUpdate?freeboard_no=${Detail.freeboard_no}'/>";
+		})
+		// 삭제
+		$('.delbtn').click(function() {
+			if(!confirm("해당 게시물을 삭제 하시겠습니까?")){
+				return;
+			}else{
+				location.href = "<c:url value='/FreeBoard/deleteFree?freeboard_no=${Detail.freeboard_no}'/>";
+			}
+		})
 		
 		
 		// 좋아요 

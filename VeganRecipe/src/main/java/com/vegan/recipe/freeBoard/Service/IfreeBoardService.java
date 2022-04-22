@@ -30,4 +30,8 @@ public interface IfreeBoardService {
 	void likeDown(int board_no , String user_no);
 	
 	int getLike(int board_no);
+	
+	void deleteFree(int freeboard_no);
+	
+	void updateFree(freeboardVO vo);
 }

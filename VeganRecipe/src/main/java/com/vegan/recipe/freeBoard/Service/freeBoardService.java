@@ -72,4 +72,13 @@ public class freeBoardService implements IfreeBoardService {
 		
 		
 	}
+	
+	@Override
+	public void deleteFree(int freeboard_no) {
+		mapper.deleteFree(freeboard_no);
+	}
+	@Override
+	public void updateFree(freeboardVO vo) {
+		mapper.updateFree(vo);
+	}
 }

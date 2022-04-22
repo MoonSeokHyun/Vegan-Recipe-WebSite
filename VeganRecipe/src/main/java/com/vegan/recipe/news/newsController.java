@@ -13,5 +13,8 @@ public class newsController {
 		System.out.println("뉴스페이지로 이동");
 	}
 	
-
+	@GetMapping("/newsWrite")
+	public void newsWrite() {
+		System.out.println("뉴스 작성페이지로 이동");
+	}
 }

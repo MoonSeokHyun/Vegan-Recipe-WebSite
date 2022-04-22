@@ -120,7 +120,7 @@
       <!-- 글작성 -->
 
       <div class="newsWrite">
-        <button type="button" class="btn btn-primary whyBtn">뉴스 작성</button>
+        <button type="button" class="btn btn-primary newsWrite">뉴스 작성</button>
       </div>
 
       <!-- 페이징 -->
@@ -146,4 +146,15 @@
 <!-- 푸터 -->
 <%@include file="../include/footer.jsp"%>
 </body>
+
+<script type="text/javascript">
+	$(function() {
+		
+		// 뉴스 페이지로 이동
+		$('.newsWrite').click(function() {
+			location.href = "<c:url value = '/news/newsWrite'/>";
+		})
+		
+	})// 제이쿼리 끝
+</script>
 </html>

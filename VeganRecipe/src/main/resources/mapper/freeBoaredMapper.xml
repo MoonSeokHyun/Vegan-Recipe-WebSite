@@ -94,6 +94,16 @@
 	  <delete id="likeDown">
 	  	delete from vegan_like where board_no = #{board_no} and user_no = #{user_no} 
 	  </delete>
+	  
+	  <!-- 게시물 삭제 -->
+	  <delete id="deleteFree">
+	  	delete from Vegan_freeBoard where freeboard_no = #{freeboard_no}
+	  </delete>
+	  <!-- 게시물 수정 -->
+	  <update id="updateFree">
+	  	update Vegan_freeBoard set freeboard_title = #{freeboard_title} , freeboard_content = #{freeboard_content}
+	  	where freeboard_no = #{freeboard_no}
+	  </update>
   </mapper>
   
 

@@ -22,4 +22,6 @@ public interface IfreeBoardMapper {
 	void likeUp(Map<String, Object> data);
 	void likeDown(Map<String, Object> data);
 	int getLike(int board_no);
+	void deleteFree(int freeboard_no);
+	void updateFree(freeboardVO vo);
 }
