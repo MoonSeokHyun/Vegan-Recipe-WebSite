@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript" src="../resources/ckeditor/ckeditor.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -27,24 +28,25 @@
     <div class="mainTitle">
         <h1>Vegan News</h1>
     </div>
-    <form action="#">
+    <form action="<c:url value='/news/newsInsert'/>" method="post">
         <div class="mb-3" style="width: 50%; margin: 0 auto;">
             <label for="exampleFormControlInput1" class="form-label">News Title</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1">
+            <input type="email" class="form-control" id="exampleFormControlInput1" name="Vboard_title">
           </div>
           <div class="mb-3" style="width: 50%; margin: 0 auto;">
             <label for="exampleFormControlInput1" class="form-label">News Witer</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1">
+            <input type="email" class="form-control" id="exampleFormControlInput1" name="Vboard_writer">
           </div>
           <div class="mb-3" style="width: 50%; margin: 0 auto;">
             <label for="exampleFormControlTextarea1" class="form-label">News Content</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <textarea class="form-control" id="ckeditor" rows="3" name="Vboard_content"></textarea>
           </div>
           <div class="mb-3" style="width: 50%; margin: 0 auto;">
             <label for="formFileMultiple" class="form-label"></label>
             <input class="form-control" type="file" id="formFileMultiple" multiple>
           </div>
-
+ 			
+ 			<input type="hidden" value="0" name="Vboard_type">
           <button type="button" class="btn btn-primary whyBtn">글 작성</button>
           <button type="button" class="btn btn-primary CancleBtn">취 &nbsp; 소</button>
     </form>
@@ -54,3 +56,18 @@
 <%@include file="../include/footer.jsp"%>
 </body>
 </html>
+
+<script type="text/javascript">
+$(function() {
+	
+	$('.whyBtn').click(function() {
+		$("form").submit();
+	})
+	 CKEDITOR.replace( 'ckeditor', {//해당 이름으로 된 textarea에 에디터를 적용
+         width:'100%',
+         height:'400px',
+         filebrowserUploadUrl:  "fileupload.do"
+     });
+
+});
+</script>

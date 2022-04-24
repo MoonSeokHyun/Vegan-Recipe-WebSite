@@ -3,8 +3,30 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="com.vegan.recipe.news.mapper.InewsMapper">
+  <mapper namespace="com.vegan.recipe.news.mapper.INewsMapper">
+     	
+     <insert id="newsInsert">
+     	insert into Vegan_board(
+     	Vboard_no,
+     	Vboard_title,
+     	Vboard_writer,
+     	Vboard_content,
+     	Vboard_hit,
+     	Vboard_like,
+     	Vboard_type
+     	) values ((select * from (select max(Vboard_no)+1 from Vegan_board) next ),
+     	#{Vboard_title},#{Vboard_writer},#{Vboard_content},0,0,0)
+    
+     </insert>
      
+     <select id="listNews" resultType="com.vegan.recipe.news.VboardVO">
+     	select * from Vegan_board
+     	limit #{pagecnt} ,  #{countPerPage}
+     </select>
+     
+     <select id="total" resultType="int">
+     	select count(*) from Vegan_board
+     </select>
   </mapper>
   
   
