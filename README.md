@@ -21,6 +21,7 @@ only myself 100%
 ## 사용기술
 
 - JAVA - SPRING
+‐ MYSQL
  
 ## 작업중 Error 정리 
 - 1. ck에디터 이미지 업로드 (완료)
