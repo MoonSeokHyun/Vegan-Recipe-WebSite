@@ -31,4 +31,11 @@ public class NewsService implements INewsService {
 	public int Total(PageVO vo) {
 		return mapper.Total(vo);
 	}
+	
+	@Override
+	public VboardVO newsDetail(int Vboard_no) {
+		return mapper.newsDetail(Vboard_no);
+	}
+	
+	
 }

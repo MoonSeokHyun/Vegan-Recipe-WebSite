@@ -60,8 +60,7 @@
           <div class="mb-3" style="width: 50%; margin: 0 auto;">
             <label for="exampleFormControlTextarea1" class="form-label"></label>
             <div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem nesciunt quis possimus accusantium sit, molestias cumque laboriosam facere, a omnis, laudantium facilis nobis consequatur minima mollitia aspernatur dolorem natus eligendi.</p>
-                <img src="../img/딸기 메인.jpg" alt="" width="400px">
+                ${detail.vboard_content}
             </div>
           </div>
 

@@ -45,7 +45,7 @@
           </div>
           <div class="mb-3" style="width: 50%; margin: 0 auto;">
             <label for="formFileMultiple" class="form-label"></label>
-            <input class="form-control" type="file" id="formFileMultiple" multiple>
+            <input class="form-control" type="file" id="formFileMultiple" name="file">
           </div>
 
           <button type="button" class="btn btn-primary whyBtn">글 작성</button>

@@ -13,4 +13,7 @@ public interface INewsService {
 	List<VboardVO> listNews(PageVO vo);
 	// 게시뭘 수
 	int Total(PageVO vo);
+	//상세보기 
+	
+	VboardVO newsDetail(int Vboard_no);
 }

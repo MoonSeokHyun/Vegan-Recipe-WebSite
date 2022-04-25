@@ -10,4 +10,6 @@ public interface INewsMapper {
 	void newsInsert(VboardVO vo);
 	List<VboardVO> listNews(PageVO vo);
 	int Total(PageVO vo);
+	VboardVO newsDetail(int Vboard_no);
 }
+

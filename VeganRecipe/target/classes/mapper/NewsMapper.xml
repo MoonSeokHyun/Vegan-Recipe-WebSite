@@ -4,6 +4,18 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.vegan.recipe.news.mapper.INewsMapper">
+     
+     	<sql id="search">
+		<if test="condition == 'Vboard_title'">
+			WHERE Vboard_title LIKE CONCAT('%',#{keyword},'%')
+		</if>
+		<if test="condition == 'Vboard_content'">
+			WHERE Vboard_content LIKE CONCAT('%',#{keyword},'%')
+		</if>
+		<if test="condition == 'Vboard_writer'">
+			WHERE Vboard_writer LIKE CONCAT('%',#{keyword},'%')
+		</if>
+	</sql>
      	
      <insert id="newsInsert">
      	insert into Vegan_board(
@@ -21,11 +33,18 @@
      
      <select id="listNews" resultType="com.vegan.recipe.news.VboardVO">
      	select * from Vegan_board
+     	<include refid="search" />
+     	order by Vboard_no desc
      	limit #{pagecnt} ,  #{countPerPage}
      </select>
      
-     <select id="total" resultType="int">
+     <select id="Total" resultType="int">
      	select count(*) from Vegan_board
+     	<include refid="search" />
+     </select>
+     
+     <select id="newsDetail" resultType="com.vegan.recipe.news.VboardVO" >
+     	select * from Vegan_board where Vboard_no = #{Vboard_no}
      </select>
   </mapper>
   

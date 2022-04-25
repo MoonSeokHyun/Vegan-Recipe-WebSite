@@ -63,10 +63,24 @@
 <!-- 뉴스 리스트 -->
     <div class="container">
         <h1>NEWS AND PRESS RELEASES</h1>
+        
+        			   <form action="<c:url value='/news/newsList'/>">
+                        <div class="search-wrap clearfix">
+                            <button type="submit" class="btn btn-primary search-btn" style="margin-right: 24%;">검색</button>
+                            <input type="text" name="keyword" class="form-control search-input" value="${pc.paging.keyword}"
+                            style="width: 200px; ">
+                            <select class="form-control" id="search-select" name="condition" style="width: 80px; margin-left: 54%">
+                                <option value="Vboard_title" ${pc.paging.condition == 'vboard_title' ? 'selected' : ''}>제목</option>
+                                <option value="Vboard_content" ${pc.paging.condition == 'vboard_content' ? 'selected' : ''}>내용</option>
+                                <option value="Vboard_writer" ${pc.paging.condition == 'vboard_writer' ? 'selected' : ''}>작성자</option>
+                            </select>
+                        </div>
+                    </form> 
+        
         <div class="row">
          <c:forEach var="vo" items="${newsList}">
           <div class="col">
-          <a href="#">
+          <a href="<c:url value='/news/newsDetail?Vboard_no=${vo.vboard_no}'/>">
                 <div class="card" style="width: 18rem;">
                 <img src="../img/stro.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
@@ -74,6 +88,7 @@
                   <p class="card-text"> Writer : ${vo.vboard_writer}</p>
                   <p class="card-text"> Date : ${vo.vboard_Regdate}</p>
                 </div>
+                
           </a>
 
               </div>
@@ -90,9 +105,11 @@
       </div>
 
       <!-- 페이징 -->
+			
 
+			
 			<div class="paging">
-					<form action="<c:url value='/FreeBoard/freeList' />" name="pageForm">
+					<form action="<c:url value='/news/newsList' />" name="pageForm">
 	                        <div class="text-center clearfix">
 	                            <ul class="pagination" id="pagination">
 	                            	<c:if test="${pc.prev}">
@@ -113,35 +130,9 @@
 	                            <input type="hidden" name="countPerPage" value="${pc.paging.countPerPage}">
 	                            <input type="hidden" name="keyword" value="${pc.paging.keyword}">
 	                            <input type="hidden" name="condition" value="${pc.paging.condition}">
-	                            <input type="hidden" name="pagecnt" value="10">
 	                        </div>
                         </form>
-			</div>			<div class="paging">
-					<form action="<c:url value='/FreeBoard/freeList' />" name="pageForm">
-	                        <div class="text-center clearfix">
-	                            <ul class="pagination" id="pagination">
-	                            	<c:if test="${pc.prev}">
-	                                	<li class="page-item "><a  class="page-link" href="#" data-pageNum="${pc.beginPage-1}">Prev</a></li>
-	                                </c:if>
-	                                
-	                                <c:forEach var="num" begin="${pc.beginPage}" end="${pc.endPage}">
-	                                	<li class="${pc.paging.pageNum == num ? 'age-item active' : ''}" page-item><a class="page-link" href="#" data-pageNum="${num}">${num}</a></li>
-	                                </c:forEach>
-	                                
-	                                <c:if test="${pc.next}">
-	                               		<li class="page-item"><a class="page-link" href="#" data-pageNum="${pc.endPage+1}">Next</a></li>
-	                                </c:if>
-	                            </ul>
-	                            
-	                            <!-- 페이지 관련 버튼을 클릭 시 같이 숨겨서 보낼 값 -->
-	                            <input type="hidden" name="pageNum" value="${pc.paging.pageNum}">
-	                            <input type="hidden" name="countPerPage" value="${pc.paging.countPerPage}">
-	                            <input type="hidden" name="keyword" value="${pc.paging.keyword}">
-	                            <input type="hidden" name="condition" value="${pc.paging.condition}">
-	                            <input type="hidden" name="pagecnt" value="10">
-	                        </div>
-                        </form>
-			</div>
+			</div>			
 
 <!-- 푸터 -->
 <%@include file="../include/footer.jsp"%>
@@ -163,6 +154,10 @@
 			document.pageForm.pageNum.value = value;
 			document.pageForm.submit();
 		});
+		
+		for(int i =0; i<${newsList}.length; i++){
+			
+		}
 		
 	})// 제이쿼리 끝
 </script>

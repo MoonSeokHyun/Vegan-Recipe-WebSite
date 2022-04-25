@@ -75,7 +75,9 @@ public class freeBoardController {
 	public String insertFreeboard(freeboardVO vo) {
 		
 
+
 			service.insertFreeboard(vo);
+
 		System.out.println("인서트 성공요");
 		
 		return "redirect:/FreeBoard/freeList";

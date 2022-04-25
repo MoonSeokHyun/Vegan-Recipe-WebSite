@@ -34,4 +34,8 @@ public class VboardVO {
 	private int Vboard_like;
 	private int Vboard_type;
 	private Timestamp Vboard_Regdate;
+	private String filename;
+	private String fileloca;
+	private String filerealname;
+	private String uploadpath;
 }

@@ -1,5 +1,7 @@
 package com.vegan.recipe.util;
 
+import org.springframework.web.multipart.MultipartFile;
+
 /*
  create table vegan_Upload(
 	img_no int(30) AUTO_INCREMENT PRIMARY KEY not null,
@@ -9,5 +11,9 @@ package com.vegan.recipe.util;
 
  */
 public class uploadVO {
+	
+	private String name;
+	private MultipartFile file;
 
+	
 }

@@ -42,8 +42,8 @@
             <textarea class="form-control" id="ckeditor" rows="3" name="Vboard_content"></textarea>
           </div>
           <div class="mb-3" style="width: 50%; margin: 0 auto;">
-            <label for="formFileMultiple" class="form-label"></label>
-            <input class="form-control" type="file" id="formFileMultiple" multiple>
+            <label for="formFileMultiple" class="form-label">썸네일</label>
+            <input class="form-control" type="file" id="formFileMultiple" name="Thumbnail" multiple>
           </div>
  			
  			<input type="hidden" value="0" name="Vboard_type">
