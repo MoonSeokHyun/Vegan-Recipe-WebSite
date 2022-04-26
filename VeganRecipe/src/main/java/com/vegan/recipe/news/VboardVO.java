@@ -15,7 +15,9 @@ Vboard_Regdate TIMESTAMP DEFAULT NOW()
 
 import java.sql.Timestamp;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -23,6 +25,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 
 public class VboardVO {
 	
@@ -38,4 +42,5 @@ public class VboardVO {
 	private String fileloca;
 	private String filerealname;
 	private String uploadpath;
+	private String file;
 }

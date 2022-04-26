@@ -82,7 +82,7 @@
           <div class="col">
           <a href="<c:url value='/news/newsDetail?Vboard_no=${vo.vboard_no}'/>">
                 <div class="card" style="width: 18rem;">
-                <img src="../img/stro.jpg" class="card-img-top" alt="...">
+                <img src="<c:url value='/news/display?fileloca=${vo.fileloca}&filename=${vo.filename}'/>" class="card-img-top" alt="..." style="height: 10rem;">
                 <div class="card-body">
                   <h5 class="card-title">Title : ${vo.vboard_title}</h5>
                   <p class="card-text"> Writer : ${vo.vboard_writer}</p>
@@ -155,9 +155,7 @@
 			document.pageForm.submit();
 		});
 		
-		for(int i =0; i<${newsList}.length; i++){
-			
-		}
+
 		
 	})// 제이쿼리 끝
 </script>

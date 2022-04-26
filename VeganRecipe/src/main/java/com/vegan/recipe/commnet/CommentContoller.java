@@ -35,7 +35,7 @@ public class CommentContoller {
 	}
 	
 	@GetMapping("/getList/{bno}/{comment_type}")
-	public Map<String, Object> getList(@PathVariable int bno , @PathVariable int comment_type , ModelAndView mav) {
+	public Map<String, Object> getList(@PathVariable int bno , @PathVariable int comment_type) {
 		System.out.println(bno +","+comment_type + "번 댓글 리스트 요청");
 		int Total = service.getTotal(bno, comment_type);
 		System.out.println(Total);

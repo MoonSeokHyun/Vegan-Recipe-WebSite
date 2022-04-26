@@ -25,11 +25,11 @@ public interface IfreeBoardService {
 	
 	int findLike(int board_no , String user_no);
 	
-	void likeUp(int board_no , String user_no);
+	void likeUp(int board_no , String user_no , int like_type);
 	
-	void likeDown(int board_no , String user_no);
+	void likeDown(int board_no , String user_no,int like_type) ;
 	
-	int getLike(int board_no);
+	int getLike(int board_no,int like_type);
 	
 	void deleteFree(int freeboard_no);
 	

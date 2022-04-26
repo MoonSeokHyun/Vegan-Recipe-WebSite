@@ -21,4 +21,5 @@ public class LikeVO {
 	private int board_no;
 	private String user_no;
 	private int freeboard_like;
+	private int like_type;
 }

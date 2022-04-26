@@ -28,7 +28,7 @@
     <div class="mainTitle">
         <h1>Vegan News</h1>
     </div>
-    <form action="<c:url value='/news/newsInsert'/>" method="post">
+    <form action="<c:url value='/news/newsInsert'/>" method="post" enctype="multipart/form-data">
         <div class="mb-3" style="width: 50%; margin: 0 auto;">
             <label for="exampleFormControlInput1" class="form-label">News Title</label>
             <input type="email" class="form-control" id="exampleFormControlInput1" name="Vboard_title">
@@ -43,7 +43,7 @@
           </div>
           <div class="mb-3" style="width: 50%; margin: 0 auto;">
             <label for="formFileMultiple" class="form-label">썸네일</label>
-            <input class="form-control" type="file" id="formFileMultiple" name="Thumbnail" multiple>
+            <input class="form-control" type="file" id="formFileMultiple" name="file1">
           </div>
  			
  			<input type="hidden" value="0" name="Vboard_type">

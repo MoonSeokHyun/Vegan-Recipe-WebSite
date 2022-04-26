@@ -18,9 +18,8 @@
     }
 
     h1{
-        margin-top: 40px;
-        margin-bottom: 30px;
-        margin-left: 30%;
+        padding-top: 30px;
+        padding-bottom: 30px
     }
     .paging{
         margin-left: auto;
@@ -28,9 +27,14 @@
         display: table;
     }
     
-    .whyBtn{
-        margin-left: 80%;
-        margin-top: 30px;
+        .whyBtn{
+        margin-left: 46%;
+    }
+    .whyBtn1{
+        margin-left: 69%;
+    }
+    .del-btn{
+        margin-left: 95%
     }
 </style>
 <body>
@@ -45,18 +49,31 @@
         <h1>Vegan News</h1>
     </div>
   
-        <div class="mb-3" style="width: 50%; margin: 0 auto;">
-            <label for="exampleFormControlInput1" class="form-label">News Title</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1">
+              <div class="mb-3" style="width: 50%; margin: 0 auto;">
+            <label for="exampleFormControlInput1" class="form-label">Title</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" value="${detail.vboard_title}" readonly>
           </div>
-          <div class="mb-3" style="width: 50%; margin: 0 auto;">
-            <label for="exampleFormControlInput1" class="form-label">News Witer</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1">
-          </div>
-          <div class="mb-3" style="width: 50%; margin: 0 auto;">
-            <label for="exampleFormControlInput1" class="form-label">News date</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1">
-          </div>
+          <div class="row g-3" style="width: 51%; margin: 0 auto; margin-top: -25px" >
+		  <div class="col">
+		   <label for="exampleFormControlInput1" class="form-label">Witer</label>
+		    <input type="text" class="form-control" id="exampleFormControlInput1" value="${detail.vboard_writer}" readonly>
+		  </div>
+		  <div class="col">
+		   <label for="exampleFormControlInput1" class="form-label">date</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" value="${detail.vboard_Regdate}" readonly>
+		  </div>
+		</div>
+		<div class="row g-3" style="width: 51%; margin: 0 auto; margin-top: -10px" >
+		 <div class="col">
+		   <label for="exampleFormControlInput1" class="form-label">HIT</label>
+		    <input type="text" class="form-control" id="exampleFormControlInput1" value="${detail.vboard_hit}" readonly>
+		  </div>
+		  <div class="col">
+		   <label for="exampleFormControlInput1" class="form-label">Like</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" value="${getLike}" readonly>
+		  </div>
+		  
+		</div>
           <div class="mb-3" style="width: 50%; margin: 0 auto;">
             <label for="exampleFormControlTextarea1" class="form-label"></label>
             <div>
@@ -64,8 +81,10 @@
             </div>
           </div>
 
-          <button type="button" class="btn btn-primary whyBtn">수정</button>
-          <button type="button" class="btn btn-primary CancleBtn">목록</button>
+          <button type="button" class="btn btn-primary whyBtn updateBtn">수정</button>
+          <button type="button" class="btn btn-primary CancleBtn listBtn">목록</button>
+		  <button type="button" class="btn btn-primary CancleBtn delbtn">삭제</button>
+		  <button type="button" class="btn btn-primary CancleBtn LikeBtn">좋아요</button>
 
           <!-- 댓글 -->
         

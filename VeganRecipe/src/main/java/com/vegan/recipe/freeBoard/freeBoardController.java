@@ -94,9 +94,9 @@ public class freeBoardController {
 		
 		like.setBoard_no(freeboard_no);
 		like.setUser_no(user_id);
-		
+		like.setLike_type(1);
 		model.addAttribute("like", service.findLike(freeboard_no, user_id));
-		model.addAttribute("getLike", service.getLike(freeboard_no));
+		model.addAttribute("getLike", service.getLike(freeboard_no,1));
 		service.hit(freeboard_no);
 		
 		
@@ -111,7 +111,8 @@ public class freeBoardController {
 		System.out.println("컨트롤러 연결 성공");
 		System.out.println(vo.getBoard_no());
 		System.out.println(vo.getUser_no());
-		service.likeUp(vo.getBoard_no(), vo.getUser_no());
+		System.out.println(vo.getLike_type());
+		service.likeUp(vo.getBoard_no(), vo.getUser_no(),vo.getLike_type());
 	
 	}
 	
@@ -119,7 +120,8 @@ public class freeBoardController {
 	@PostMapping("/likeDown")
 	public void likeDown(@RequestBody LikeVO vo) {
 		System.out.println("좋아요 싫어요!");
-		service.likeDown(vo.getBoard_no(), vo.getUser_no());
+		System.out.println(vo.getLike_type());
+		service.likeDown(vo.getBoard_no(), vo.getUser_no(),vo.getLike_type());
 	}
 	
 	

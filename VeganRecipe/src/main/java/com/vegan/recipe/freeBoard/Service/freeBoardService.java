@@ -52,23 +52,27 @@ public class freeBoardService implements IfreeBoardService {
 	}
 	
 	@Override
-	public void likeUp(int board_no, String user_no) {
+	public void likeUp(int board_no, String user_no , int like_type) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("board_no", board_no);
 		map.put("user_no", user_no);
+		map.put("like_type", like_type);
 		mapper.likeUp(map);
 	}
 	@Override
-	public void likeDown(int board_no, String user_no) {
+	public void likeDown(int board_no, String user_no, int like_type) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("board_no", board_no);
 		map.put("user_no", user_no);
-
+		map.put("like_type", like_type);
 		mapper.likeDown(map);
 	}
 	@Override
-	public int getLike(int board_no) {
-		return mapper.getLike(board_no);	
+	public int getLike(int board_no,int like_type) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("board_no", board_no);
+		map.put("like_type", like_type);
+		return mapper.getLike(map);	
 		
 		
 	}

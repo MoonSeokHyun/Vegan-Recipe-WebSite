@@ -128,6 +128,8 @@
 		
 		let board_no = ${Detail.freeboard_no};
 		let user_no = '${login.user_id}';
+		let like_type = 1;
+		
 		if(likeval > 0){
 			console.log(likeval + "좋아요 누름");
 			$('.LikeBtn').html("좋아요 취소");
@@ -139,7 +141,8 @@
 					data : JSON.stringify(
 							{
 								"board_no" : board_no,
-								"user_no" : user_no
+								"user_no" : user_no,
+								"like_type" : like_type
 							}		
 						),
 					success : function(data) {
@@ -159,7 +162,8 @@
 					data : JSON.stringify(
 							{
 								"board_no" : board_no,
-								"user_no" : user_no
+								"user_no" : user_no,
+								"like_type" : like_type
 							}		
 						),
 					success : function(data) {
