@@ -35,9 +35,24 @@
     
      </insert>
      
+       <!-- 메인용 리스트 -->
+     
+     <select id="main" resultType="com.vegan.recipe.news.VboardVO">
+     	select * ,
+     	(select count(*) from vegan_comment where bno = v.Vboard_no) as com_cnt,
+		(select count(*) from vegan_like where board_no = v.Vboard_no) as like_cnt
+     	from Vegan_board v
+     	  	<include refid="search" />
+     	order by Vboard_no desc
+     	limit 0 ,  4
+     </select>
+     
      <select id="listNews" resultType="com.vegan.recipe.news.VboardVO">
-     	select * from Vegan_board
-     	<include refid="search" />
+     	select * ,
+     	(select count(*) from vegan_comment where bno = v.Vboard_no) as com_cnt,
+		(select count(*) from vegan_like where board_no = v.Vboard_no) as like_cnt
+     	from Vegan_board v
+     	  	<include refid="search" />
      	order by Vboard_no desc
      	limit #{pagecnt} ,  #{countPerPage}
      </select>
@@ -50,6 +65,17 @@
      <select id="newsDetail" resultType="com.vegan.recipe.news.VboardVO" >
      	select * from Vegan_board where Vboard_no = #{Vboard_no}
      </select>
+     
+     <update id="hitNews">
+     	 update Vegan_board 
+      set Vboard_hit = Vboard_hit + 1
+      where Vboard_no = #{Vboard_no}
+     </update>
+     
+       <!-- 게시물 삭제 -->
+	  <delete id="deleteNews">
+	  	delete from Vegan_board where Vboard_no = #{Vboard_no}
+	  </delete>
   </mapper>
   
   

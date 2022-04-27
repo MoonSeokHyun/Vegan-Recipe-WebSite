@@ -119,7 +119,9 @@ public class freeBoardController {
 	@ResponseBody
 	@PostMapping("/likeDown")
 	public void likeDown(@RequestBody LikeVO vo) {
-		System.out.println("좋아요 싫어요!");
+		System.out.println("컨트롤러 연결 성공");
+		System.out.println(vo.getBoard_no());
+		System.out.println(vo.getUser_no());
 		System.out.println(vo.getLike_type());
 		service.likeDown(vo.getBoard_no(), vo.getUser_no(),vo.getLike_type());
 	}

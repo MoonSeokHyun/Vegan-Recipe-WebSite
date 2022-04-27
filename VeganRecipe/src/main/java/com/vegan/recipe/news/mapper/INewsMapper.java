@@ -11,5 +11,8 @@ public interface INewsMapper {
 	List<VboardVO> listNews(PageVO vo);
 	int Total(PageVO vo);
 	VboardVO newsDetail(int Vboard_no);
+	void hitNews(int Vboard_no);
+	List<VboardVO> main();
+	void deleteNews(int Vboard_no);
 }
 

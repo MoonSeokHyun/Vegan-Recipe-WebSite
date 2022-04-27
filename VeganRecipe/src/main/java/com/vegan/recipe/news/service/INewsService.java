@@ -16,4 +16,10 @@ public interface INewsService {
 	//상세보기 
 	
 	VboardVO newsDetail(int Vboard_no);
+	
+	void hitNews(int Vboard_no);
+	
+	List<VboardVO> main();
+	
+	void deleteNews(int Vboard_no);
 }

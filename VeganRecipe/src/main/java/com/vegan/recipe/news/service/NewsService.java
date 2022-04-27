@@ -37,5 +37,17 @@ public class NewsService implements INewsService {
 		return mapper.newsDetail(Vboard_no);
 	}
 	
-	
+	@Override
+	public void hitNews(int Vboard_no) {
+		mapper.hitNews(Vboard_no);
+		
+	}
+	@Override
+	public List<VboardVO> main() {
+		return mapper.main();
+	}
+	@Override
+	public void deleteNews(int Vboard_no) {
+		mapper.deleteNews(Vboard_no);
+	}
 }

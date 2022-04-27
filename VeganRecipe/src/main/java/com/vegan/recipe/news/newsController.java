@@ -21,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +31,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.google.gson.JsonObject;
+import com.vegan.recipe.freeBoard.Service.IfreeBoardService;
 import com.vegan.recipe.news.service.INewsService;
+import com.vegan.recipe.util.LikeVO;
 import com.vegan.recipe.util.PageCreate;
 import com.vegan.recipe.util.PageVO;
 
@@ -39,6 +42,8 @@ import com.vegan.recipe.util.PageVO;
 public class newsController {
 	@Autowired
 	private INewsService service;
+	@Autowired
+	private IfreeBoardService free;
 	
 	@GetMapping("/newsList")
 	public String newsList(Model model , PageVO vo) {
@@ -99,7 +104,7 @@ public class newsController {
 	
 			file.transferTo(saveFile);
 			
-			VboardVO Vvo = new VboardVO(0,vo.getVboard_title(),vo.getVboard_writer(), vo.getVboard_content() , 0, 0, vo.getVboard_type(), null, fileName, fileLoca, fileRealName, uploadPath, null);
+			VboardVO Vvo = new VboardVO(0,vo.getVboard_title(),vo.getVboard_writer(), vo.getVboard_content() , 0, 0, vo.getVboard_type(), null, fileName, fileLoca, fileRealName, uploadPath, null,0,0);
 			
 				service.newsInsert(Vvo);
 
@@ -198,11 +203,25 @@ public class newsController {
 	
 	
 	@GetMapping("/newsDetail")
-	public void newsDetail(int Vboard_no ,Model model) {
+	public void newsDetail(int Vboard_no , String user_id ,Model model) {
 		
 		model.addAttribute("detail", service.newsDetail(Vboard_no));
+		
+		LikeVO like = new LikeVO();
+		like.setBoard_no(Vboard_no);
+		like.setUser_no(user_id);
+		like.setLike_type(2);
+		model.addAttribute("like", free.findLike(Vboard_no, user_id));
+		model.addAttribute("getLike", free.getLike(Vboard_no,2));
+		service.hitNews(Vboard_no);
+		
 	}
 	
-	
+	@GetMapping("/deleteNews")
+	public String deleteNews(int Vboard_no ) {
+		System.out.println(Vboard_no);
+		service.deleteNews(Vboard_no);
+		return "redirect:/news/newsList";
+	}
 	
 }

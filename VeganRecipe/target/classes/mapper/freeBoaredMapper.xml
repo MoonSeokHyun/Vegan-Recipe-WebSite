@@ -36,6 +36,10 @@
      
      <!-- 글목록 나중에 페이징 이랑 검색 할꺼임 -->
      
+     <!-- 메인용 리스트 -->
+     
+     
+     
      <select id="getFreeBoard" resultType="com.vegan.recipe.freeBoard.freeboardVO">
 
      	select *,

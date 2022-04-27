@@ -54,6 +54,11 @@
     a:active {
         text-decoration: none;
     }
+	.col{
+		margin-bottom: 10px
+	}
+	
+
 </style>
 <body>
 <!-- 헤더 -->
@@ -85,8 +90,10 @@
                 <img src="<c:url value='/news/display?fileloca=${vo.fileloca}&filename=${vo.filename}'/>" class="card-img-top" alt="..." style="height: 10rem;">
                 <div class="card-body">
                   <h5 class="card-title">Title : ${vo.vboard_title}</h5>
-                  <p class="card-text"> Writer : ${vo.vboard_writer}</p>
-                  <p class="card-text"> Date : ${vo.vboard_Regdate}</p>
+                  <p class="card-title"> Writer : ${vo.vboard_writer}</p>
+                  <p class="card-title"> Date : ${vo.vboard_Regdate}</p>
+				  <p class="card-title">댓글 ${vo.com_cnt} 좋아요 ${vo.like_cnt} 조회수 ${vo.vboard_hit} </p>
+                  
                 </div>
                 
           </a>

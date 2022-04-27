@@ -113,6 +113,8 @@
           </tr>
         </thead>
         <tbody>
+
+
         <c:forEach var="vo" items="${freeList}">
           <tr>
           	<th scope="row">${vo.freeboard_no}</th>
