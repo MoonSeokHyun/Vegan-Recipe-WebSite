@@ -81,8 +81,8 @@
             </div>
           </div>
 
-          <button type="button" class="btn btn-primary whyBtn updateBtn">수정</button>
-          <button type="button" class="btn btn-primary CancleBtn listBtn">목록</button>
+
+          <button type="button" class="btn btn-primary whyBtn CancleBtn listBtn">목록</button>
 		  <button type="button" class="btn btn-primary CancleBtn delbtn">삭제</button>
 		  <button type="button" class="btn btn-primary CancleBtn LikeBtn">좋아요</button>
 
@@ -285,8 +285,15 @@
 				location.href = "<c:url value='/news/deleteNews?Vboard_no=${detail.vboard_no}'/>";
 			}
 			})
+	
+			
+		$('.updateBtn').click(function() {
 
 
+				location.href = "<c:url value='/news/updateNews?Vboard_no=${detail.vboard_no}'/>";
+
+			})
+			
 			
 		})
 

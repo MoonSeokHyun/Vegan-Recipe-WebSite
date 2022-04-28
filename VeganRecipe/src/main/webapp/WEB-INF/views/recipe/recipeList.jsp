@@ -121,7 +121,7 @@
       <!-- 글작성 -->
 
       <div class="newsWrite">
-        <button type="button" class="btn btn-primary whyBtn">뉴스 작성</button>
+        <button type="button" class="btn btn-primary whyBtn">요리 등록</button>
       </div>
 
       <!-- 페이징 -->
@@ -147,4 +147,27 @@
 <!-- 푸터 -->
 <%@include file="../include/footer.jsp"%>
 </body>
+
+<script type="text/javascript">
+	$(function() {
+		
+		// 뉴스 페이지로 이동
+		$('.whyBtn').click(function() {
+			location.href = "<c:url value = '/recipe/recipeWrite'/>";
+		})
+		
+		$('#pagination').on('click', 'a', function(e) {
+			e.preventDefault();
+			console.log($(this));
+			const value = $(this).data('pagenum');
+			console.log(value);
+			document.pageForm.pageNum.value = value;
+			document.pageForm.submit();
+		});
+		
+
+		
+	})// 제이쿼리 끝
+</script>
+
 </html>

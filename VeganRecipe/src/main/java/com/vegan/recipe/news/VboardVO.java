@@ -43,6 +43,7 @@ public class VboardVO {
 	private String filerealname;
 	private String uploadpath;
 	private String file;
+	private String material;
 	private int com_cnt;
 	private int like_cnt;
 }

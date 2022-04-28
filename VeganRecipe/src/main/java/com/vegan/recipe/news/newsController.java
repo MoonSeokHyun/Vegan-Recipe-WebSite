@@ -104,7 +104,7 @@ public class newsController {
 	
 			file.transferTo(saveFile);
 			
-			VboardVO Vvo = new VboardVO(0,vo.getVboard_title(),vo.getVboard_writer(), vo.getVboard_content() , 0, 0, vo.getVboard_type(), null, fileName, fileLoca, fileRealName, uploadPath, null,0,0);
+			VboardVO Vvo = new VboardVO(0,vo.getVboard_title(),vo.getVboard_writer(), vo.getVboard_content() , 0, 0, vo.getVboard_type(), null, fileName, fileLoca, fileRealName, uploadPath, null,null,0,0);
 			
 				service.newsInsert(Vvo);
 
@@ -206,11 +206,12 @@ public class newsController {
 	public void newsDetail(int Vboard_no , String user_id ,Model model) {
 		
 		model.addAttribute("detail", service.newsDetail(Vboard_no));
+
+		System.out.println("확인용"+ free.findLike(Vboard_no, user_id));
 		
-		LikeVO like = new LikeVO();
-		like.setBoard_no(Vboard_no);
-		like.setUser_no(user_id);
-		like.setLike_type(2);
+		System.out.println("아이디" + Vboard_no + "아이디" + user_id);
+		
+		
 		model.addAttribute("like", free.findLike(Vboard_no, user_id));
 		model.addAttribute("getLike", free.getLike(Vboard_no,2));
 		service.hitNews(Vboard_no);
@@ -224,4 +225,9 @@ public class newsController {
 		return "redirect:/news/newsList";
 	}
 	
+	
+	@GetMapping("/updateNews")
+	public void updateNews(int Vboard_no) {
+		System.out.println("뉴스 수정");
+	}
 }
