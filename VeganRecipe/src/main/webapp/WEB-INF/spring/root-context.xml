@@ -35,6 +35,7 @@
  	  <mybatis-spring:scan base-package="com.vegan.recipe.user.mapper"/>
 	  <mybatis-spring:scan base-package="com.vegan.recipe.freeBoard.mapper"/>
   	  <mybatis-spring:scan base-package="com.vegan.recipe.commnet.mapper"/>
+  	   <mybatis-spring:scan base-package="com.vegan.recipe.recipe.mapper"/>
 
 
 </beans>

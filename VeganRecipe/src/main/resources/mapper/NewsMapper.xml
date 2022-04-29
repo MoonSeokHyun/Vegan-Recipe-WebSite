@@ -7,13 +7,13 @@
      
      	<sql id="search">
 		<if test="condition == 'Vboard_title'">
-			WHERE Vboard_title LIKE CONCAT('%',#{keyword},'%')
+			and Vboard_title LIKE CONCAT('%',#{keyword},'%') 
 		</if>
 		<if test="condition == 'Vboard_content'">
-			WHERE Vboard_content LIKE CONCAT('%',#{keyword},'%')
+			and Vboard_content LIKE CONCAT('%',#{keyword},'%') 
 		</if>
 		<if test="condition == 'Vboard_writer'">
-			WHERE Vboard_writer LIKE CONCAT('%',#{keyword},'%')
+			and Vboard_writer LIKE CONCAT('%',#{keyword},'%') 
 		</if>
 	</sql>
      	
@@ -42,6 +42,7 @@
      	(select count(*) from vegan_comment where bno = v.Vboard_no) as com_cnt,
 		(select count(*) from vegan_like where board_no = v.Vboard_no) as like_cnt
      	from Vegan_board v
+     	where vboard_type = 0
      	  	<include refid="search" />
      	order by Vboard_no desc
      	limit 0 ,  4
@@ -52,6 +53,7 @@
      	(select count(*) from vegan_comment where bno = v.Vboard_no) as com_cnt,
 		(select count(*) from vegan_like where board_no = v.Vboard_no) as like_cnt
      	from Vegan_board v
+     	where vboard_type = 0
      	  	<include refid="search" />
      	order by Vboard_no desc
      	limit #{pagecnt} ,  #{countPerPage}
@@ -59,11 +61,12 @@
      
      <select id="Total" resultType="int">
      	select count(*) from Vegan_board
+     	where vboard_type = 0
      	<include refid="search" />
      </select>
      
      <select id="newsDetail" resultType="com.vegan.recipe.news.VboardVO" >
-     	select * from Vegan_board where Vboard_no = #{Vboard_no}
+     	select * from Vegan_board where Vboard_no = #{Vboard_no} and vboard_type = 0;
      </select>
      
      <update id="hitNews">

@@ -25,7 +25,7 @@
 <div class="mainTitle">
         <h1>Vegan Recipe</h1>
     </div>
-    <form action="<c:url value='/recipe/recipeinsert'/>" method="post">
+    <form action="<c:url value='/recipe/recipeinsert'/>" method="post" enctype="multipart/form-data">
         <div class="mb-3" style="width: 50%; margin: 0 auto;">
             <label for="exampleFormControlInput1" class="form-label">Recipe Title</label>
             <input type="text" class="form-control" id="exampleFormControlInput1" name="Vboard_title">

@@ -10,20 +10,29 @@
         text-align: center;
     }
 
-    .whyBtn{
-        margin-left: 46%;
-    }
-
-    .whyBtn1{
-        margin-left: 69%;
-    }
-
-    .del-btn{
-        margin-left: 95%
+    .newsWrite{
+        width: 1200px;
+        margin: 0 auto;
     }
 
     h1{
-        margin-top: 20px;
+        padding-top: 30px;
+        padding-bottom: 30px
+    }
+    .paging{
+        margin-left: auto;
+        margin-right: auto;
+        display: table;
+    }
+    
+        .whyBtn{
+        margin-left: 46%;
+    }
+    .whyBtn1{
+        margin-left: 69%;
+    }
+    .del-btn{
+        margin-left: 95%
     }
 </style>
 <head>
@@ -35,49 +44,61 @@
 <%@ include file="../include/header.jsp"%>
 
 <!-- 붙혀 넣는곳! -->
-    <div class="mainTitle">
-        <h1>Vegan Recipe</h1>
+ <div class="mainTitle">
+        <h1>Vegan News</h1>
     </div>
   
-        <div class="mb-3" style="width: 50%; margin: 0 auto;">
-            <label for="exampleFormControlInput1" class="form-label">Recipe Title</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1">
+              <div class="mb-3" style="width: 50%; margin: 0 auto;">
+            <label for="exampleFormControlInput1" class="form-label">Title</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" value="${detail.vboard_title}" readonly>
           </div>
+          <div class="row g-3" style="width: 51%; margin: 0 auto; margin-top: -25px" >
+		  <div class="col">
+		   <label for="exampleFormControlInput1" class="form-label">Witer</label>
+		    <input type="text" class="form-control" id="exampleFormControlInput1" value="${detail.vboard_writer}" readonly>
+		  </div>
+		  <div class="col">
+		   <label for="exampleFormControlInput1" class="form-label">date</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" value="${detail.vboard_Regdate}" readonly>
+		  </div>
+		</div>
+	
+		<div class="row g-3" style="width: 51%; margin: 0 auto; margin-top: -10px" >
+		 <div class="col">
+		   <label for="exampleFormControlInput1" class="form-label">HIT</label>
+		    <input type="text" class="form-control" id="exampleFormControlInput1" value="${detail.vboard_hit}" readonly>
+		  </div>
+		  <div class="col">
+		   <label for="exampleFormControlInput1" class="form-label">Like</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" value="${getLike}" readonly>
+		  </div>
+		  
+		</div>
+		
           <div class="mb-3" style="width: 50%; margin: 0 auto;">
-            <label for="exampleFormControlInput1" class="form-label">Chef</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1">
+            <label for="exampleFormControlTextarea1" class="form-label">재료</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="material" readonly="readonly">${detail.material}</textarea>
           </div>
+          
           <div class="mb-3" style="width: 50%; margin: 0 auto;">
-            <label for="exampleFormControlInput1" class="form-label">Date</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1">
-          </div>
-
-          <div class="mb-3" style="width: 50%; margin: 0 auto; border-bottom: 1px solid #212529; padding-bottom: 30px;">
             <label for="exampleFormControlTextarea1" class="form-label"></label>
             <div>
-                <h3 style="text-align: center; margin-bottom: 20px;">요리 재료</h3>
-                <p>1. 당근 2. 파스타 3.쫄면 4. 햄버거 </p>
+                ${detail.vboard_content}
             </div>
           </div>
 
-          <div class="mb-3" style="width: 50%; margin: 0 auto;">
-            <label for="exampleFormControlTextarea1" class="form-label"></label>
-            <div>
-                <h3 style="text-align: center; margin-bottom: 20px;">조리 과정</h3> 
-                <p>맛있게 만드셈</p>
-            </div>
-          </div>
 
-          <button type="button" class="btn btn-primary whyBtn">수정</button>
-          <button type="button" class="btn btn-primary CancleBtn">목록</button>
+          <button type="button" class="btn btn-primary whyBtn CancleBtn listBtn">목록</button>
+		  <button type="button" class="btn btn-primary CancleBtn delbtn">삭제</button>
+		  <button type="button" class="btn btn-primary CancleBtn LikeBtn">좋아요</button>
+
 
           <!-- 댓글 -->
         
         
-        
-        <div class="mb-3" style="width: 50%; margin: 0 auto;">
+       <div class="mb-3" style="width: 50%; margin: 0 auto;">
             <label for="exampleFormControlInput1" class="form-label">Comment Writer</label>
-            <input type="text" class="form-control commnet_id" id="exampleFormControlInput1" name="commnet_id">
+            <input type="text" class="form-control commnet_id" id="exampleFormControlInput1" name="commnet_id" value="${login.user_id}">
           </div>
           <div class="mb-3" style="width: 50%; margin: 0 auto;">
             <label for="exampleFormControlTextarea1" class="form-label">Comment</label>
@@ -87,17 +108,8 @@
 
         
         <!-- 댓글이 들어갈 부분 -->
-        <div>
-            <div class="mb-3" style="width: 50%; margin: 0 auto;">
-                <label for="exampleFormControlInput1" class="form-label">Comment Writer :  asdasd</label>
-                &nbsp;&nbsp;&nbsp;<a href="#" >삭제</a></span>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" readonly>나는 비건</textarea>
-               
-            </div>
-            <div class="mb-3" style="width: 50%; margin: 0 auto;">
-                <label for="exampleFormControlInput1" class="form-label">Comment Writer :  asdasd</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" readonly>나는 비건</textarea>
-            </div>
+        <div class="com_box">
+
         </div>
 
 <!-- 푸터 -->

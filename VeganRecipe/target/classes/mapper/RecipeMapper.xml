@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.vegan.recipe.recipe.mapper.IRecipeMapper">
+     <sql id="search">
+		<if test="condition == 'Vboard_title'">
+			and Vboard_title LIKE CONCAT('%',#{keyword},'%') and vboard_type = 1
+		</if>
+		<if test="condition == 'Vboard_content'"> 
+			and Vboard_content LIKE CONCAT('%',#{keyword},'%')  and vboard_type = 1
+		</if>
+		<if test="condition == 'Vboard_writer'">
+			and Vboard_writer LIKE CONCAT('%',#{keyword},'%')  and vboard_type = 1
+		</if>
+	</sql>
+	
+       <insert id="insertRecipe">
+     	insert into Vegan_board(
+     	Vboard_no,
+     	Vboard_title,
+     	Vboard_writer,
+     	Vboard_content,
+     	Vboard_hit,
+     	Vboard_like,
+     	Vboard_type,
+     	filename,
+     	fileloca,
+     	filerealname,
+     	uploadpath,
+     	material,
+     	file
+     	) values ((select * from (select max(Vboard_no)+1 from Vegan_board) next ),
+     	#{Vboard_title},#{Vboard_writer},#{Vboard_content},0,0,#{Vboard_type},#{filename},#{fileloca},#{filerealname},#{uploadpath},#{file},#{material})
+    
+     </insert>
+     
+          <select id="getRecipe" resultType="com.vegan.recipe.news.VboardVO">
+     	select * ,
+     	(select count(*) from vegan_comment where bno = v.Vboard_no) as com_cnt,
+		(select count(*) from vegan_like where board_no = v.Vboard_no) as like_cnt
+     	from Vegan_board v
+     	 where vboard_type = 1 
+     	  	<include refid="search" />
+     	order by Vboard_no desc
+     	limit #{pagecnt} ,  #{countPerPage}
+     </select>
+     
+
+     <select id="getTotal" resultType="int">
+     	select count(*) from Vegan_board
+     	where vboard_type = 1  
+     	<include refid="search" />
+     </select>
+     
+     <select id="recipeDetail" resultType="com.vegan.recipe.news.VboardVO" >
+     	select * from Vegan_board where Vboard_no = #{Vboard_no} and vboard_type = 1;
+     </select>
+     
+  </mapper>

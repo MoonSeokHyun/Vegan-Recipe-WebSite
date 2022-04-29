@@ -10,10 +10,12 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,14 +24,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.vegan.recipe.news.VboardVO;
+import com.vegan.recipe.recipe.service.IRecipeService;
+import com.vegan.recipe.util.PageCreate;
+import com.vegan.recipe.util.PageVO;
 
 @Controller
 @RequestMapping("/recipe")
 public class recipeController {
 
+	@Autowired
+	private IRecipeService service;
+	
 	@GetMapping("/recipeList")
-	public void recipeList() {
+	public void recipeList(Model model, PageVO vo) {
 		System.out.println("레시피리스트로 이동");
+		
+		PageCreate pc = new PageCreate();
+		pc.setPaging(vo);
+		pc.setArticleTotalCount(service.getTotal(vo));
+		System.out.println(pc);
+		vo.setPagecnt((vo.getPageNum()-1) * vo.getCountPerPage());
+		System.out.println("뉴스페이지로 이동");
+		model.addAttribute("recipeList", service.getRecipe(vo));
+		model.addAttribute("pc", pc);
 	}
 	
 	@GetMapping("/recipeWrite")
@@ -75,8 +92,8 @@ public class recipeController {
 	
 			file.transferTo(saveFile);
 			
-			VboardVO Vvo = new VboardVO(0,vo.getVboard_title(),vo.getVboard_writer(), vo.getVboard_content() , 0, 0, vo.getVboard_type(), null, fileName, fileLoca, fileRealName, uploadPath, null,null,0,0);
-			
+			VboardVO Vvo = new VboardVO(0,vo.getVboard_title(),vo.getVboard_writer(), vo.getVboard_content() , vo.getVboard_type(), 0, vo.getVboard_type(), null, fileName, fileLoca, fileRealName, uploadPath, vo.getFile(),vo.getMaterial(),0,0);
+			service.insertRecipe(Vvo);
 
 			} catch (IllegalStateException | IOException e) {
 			e.printStackTrace();
@@ -110,6 +127,13 @@ public class recipeController {
 	 
 		
 		return result;
+	}
+	
+	@GetMapping("/recipeDetail")
+	public void recipeDetail(int Vboard_no , String user_id ,Model model) {
+		System.out.println("레시피 상세보기");
+		
+		model.addAttribute("detail", service.recipeDetail(Vboard_no));
 	}
 	
 }
