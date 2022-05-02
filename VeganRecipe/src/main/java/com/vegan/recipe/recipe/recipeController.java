@@ -1,7 +1,10 @@
 package com.vegan.recipe.recipe;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,6 +13,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -21,8 +25,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.google.gson.JsonObject;
+import com.vegan.recipe.freeBoard.Service.IfreeBoardService;
 import com.vegan.recipe.news.VboardVO;
 import com.vegan.recipe.recipe.service.IRecipeService;
 import com.vegan.recipe.util.PageCreate;
@@ -34,6 +42,9 @@ public class recipeController {
 
 	@Autowired
 	private IRecipeService service;
+	
+	@Autowired
+	private IfreeBoardService free;
 	
 	@GetMapping("/recipeList")
 	public void recipeList(Model model, PageVO vo) {
@@ -93,7 +104,8 @@ public class recipeController {
 			file.transferTo(saveFile);
 			
 			VboardVO Vvo = new VboardVO(0,vo.getVboard_title(),vo.getVboard_writer(), vo.getVboard_content() , vo.getVboard_type(), 0, vo.getVboard_type(), null, fileName, fileLoca, fileRealName, uploadPath, vo.getFile(),vo.getMaterial(),0,0);
-			service.insertRecipe(Vvo);
+			
+				service.insertRecipe(Vvo);
 
 			} catch (IllegalStateException | IOException e) {
 			e.printStackTrace();
@@ -101,7 +113,7 @@ public class recipeController {
 		
 		
 		//service.newsInsert(vo);
-		return "redirect:/news/newsList";
+		return "redirect:/recipe/recipeList";
 		
 
 	}
@@ -130,10 +142,72 @@ public class recipeController {
 	}
 	
 	@GetMapping("/recipeDetail")
-	public void recipeDetail(int Vboard_no , String user_id ,Model model) {
+	public void recipeDetail(int Vboard_no , String user_id , Model model) {
 		System.out.println("레시피 상세보기");
-		
+		service.recipeHit(Vboard_no);
+		model.addAttribute("like", free.findLike(Vboard_no, user_id));
+		model.addAttribute("getLike", free.getLike(Vboard_no,3));
 		model.addAttribute("detail", service.recipeDetail(Vboard_no));
 	}
 	
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "fileupload.do")
+    public void communityImageUpload(HttpServletRequest req, HttpServletResponse resp, MultipartHttpServletRequest multiFile) throws Exception{
+		JsonObject jsonObject = new JsonObject();
+		PrintWriter printWriter = null;
+		OutputStream out = null;
+		MultipartFile file = multiFile.getFile("upload");
+		
+		if(file != null) {
+			if(file.getSize() >0 && StringUtils.isNotBlank(file.getName())) {
+				if(file.getContentType().toLowerCase().startsWith("image/")) {
+				    try{
+				    	 
+			            String fileName = file.getOriginalFilename();
+			            byte[] bytes = file.getBytes();
+			           
+			            String uploadPath = req.getSession().getServletContext().getRealPath("/resources/images/noticeimg"); //저장경로
+			            System.out.println("uploadPath:"+uploadPath);
+
+			            File uploadFile = new File(uploadPath);
+			            if(!uploadFile.exists()) {
+			            	uploadFile.mkdir();
+			            }
+			            String fileName2 = UUID.randomUUID().toString();
+			            uploadPath = uploadPath + "/" + fileName2 +fileName;
+			            
+			            out = new FileOutputStream(new File(uploadPath));
+			            out.write(bytes);
+			            
+			            printWriter = resp.getWriter();
+			            String fileUrl = req.getContextPath() + "/resources/images/noticeimg/" +fileName2 +fileName; //url경로
+			            System.out.println("fileUrl :" + fileUrl);
+			            JsonObject json = new JsonObject();
+			            json.addProperty("uploaded", 1);
+			            json.addProperty("fileName", fileName);
+			            json.addProperty("url", fileUrl);
+			            printWriter.print(json);
+			            System.out.println(json);
+			 
+			        }catch(IOException e){
+			            e.printStackTrace();
+			        } finally {
+			            if (out != null) {
+		                    out.close();
+		                }
+		                if (printWriter != null) {
+		                    printWriter.close();
+		                }
+			        }
+				}
+
+			
+		}
+		
+	}
+	} // 이미지 업로드 끝
+	
+
 }

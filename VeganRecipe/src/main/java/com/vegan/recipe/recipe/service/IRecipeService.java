@@ -15,4 +15,6 @@ public interface IRecipeService {
 	int getTotal(PageVO vo);
 	
 	VboardVO recipeDetail(int vboard_no);
+	
+	void recipeHit(int vboard_no);
 }

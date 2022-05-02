@@ -58,4 +58,10 @@
      	select * from Vegan_board where Vboard_no = #{Vboard_no} and vboard_type = 1;
      </select>
      
+     
+     <update id="recipeHit">
+      update Vegan_board 
+      set Vboard_hit = Vboard_hit + 1
+      where Vboard_no = #{Vboard_no} and vboard_type = 1
+     </update>
   </mapper>

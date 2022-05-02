@@ -1,6 +1,8 @@
 package com.vegan.recipe.recipe.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,4 +39,9 @@ public class RecipeService implements IRecipeService {
 		return mapper.recipeDetail(vboard_no);
 	}
 	
+	@Override
+	public void recipeHit(int vboard_no) {
+		mapper.recipeHit(vboard_no);
+		
+	}
 }

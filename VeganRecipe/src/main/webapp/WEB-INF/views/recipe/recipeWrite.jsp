@@ -36,11 +36,11 @@
           </div>
           <div class="mb-3" style="width: 50%; margin: 0 auto;">
             <label for="exampleFormControlInput1" class="form-label">요리 한줄 소개</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" name="file">
+            <input type="text" class="form-control" id="exampleFormControlInput1" name="material">
           </div>
           <div class="mb-3" style="width: 50%; margin: 0 auto;">
             <label for="exampleFormControlTextarea1" class="form-label">재료</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="material"></textarea>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="file"></textarea>
           </div>
           <div class="mb-3" style="width: 50%; margin: 0 auto;">
             <label for="exampleFormControlTextarea1" class="form-label">조리 순서</label>
